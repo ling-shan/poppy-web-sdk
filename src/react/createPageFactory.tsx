@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { WebModuleFactory } from "./webModule";
+import { WebModuleFactory } from "../utils/webModule";
 import PageShell from 'react/components/PageShell/PageShell';
 import NotFoundPage from 'react/components/NotFoundPage/NotFoundPage';
 
