@@ -6,7 +6,7 @@ export function useLoadTextRender(props: RenderComponentProps) {
 
   useEffect(() => {
     (async () => {
-      props.onLoad?.();
+      props.onStart?.();
       try {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const responseResult = await fetch(props.url!, {
@@ -16,7 +16,7 @@ export function useLoadTextRender(props: RenderComponentProps) {
         });
         const responseContent = await responseResult.text();
         setContent(responseContent ?? '');
-        props.onReady?.();
+        props.onLoad?.();
       } catch (err) {
         props.onError?.();
       }

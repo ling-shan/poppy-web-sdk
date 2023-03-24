@@ -10,8 +10,8 @@ export enum RenderTypes {
 
 export interface RenderComponentProps {
   url: string
+  onStart?: () => void
   onLoad?: () => void
-  onReady?: () => void
   onError?: () => void
 }
 

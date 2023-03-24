@@ -16,7 +16,7 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
     let webModuleInstClean: CallableFunction | null = null;
     // load and create an instance.
     (async () => {
-      props.onLoad?.();
+      props.onStart?.();
       try {
         const targetUrl =  getAbsPathURLObject(props.url as string);
         const targetUrlSearchParams = urlSearchParamsToObject(targetUrl.searchParams);
@@ -28,7 +28,7 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
             webModule,
             params: targetUrlSearchParams
           })
-          props.onReady?.();
+          props.onLoad?.();
         }
       } catch(err) {
         props.onError?.();
