@@ -20,7 +20,7 @@ export function ProxyRender(props: ProxyRenderProps) {
       <RenderComponent url={props.url}
         onLoad={props.onLoad}
         onError={props.onError}
-        onReady={props.onReady} />
+        onStart={props.onStart} />
     );
   }, [props.url, props.renderType]);
 }

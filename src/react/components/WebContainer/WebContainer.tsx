@@ -8,7 +8,7 @@ interface WebContainerProps {
   className?: string
   url?: string
   onLoad?: () => void
-  onReady?: () => void
+  onStart?: () => void
   onError?: () => void
 }
 
@@ -57,7 +57,7 @@ export function WebContainer(props: WebContainerProps) {
         url={props.url ?? ""}
         onLoad={props.onLoad}
         onError={props.onError}
-        onReady={props.onReady}/>
+        onStart={props.onStart}/>
     </div>
   );
 }
