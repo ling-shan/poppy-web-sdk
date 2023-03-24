@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 import { RenderComponentProps } from "../renderRegistory";
-import { getPathURLByURLObject, getAbsPathURLObject, urlSearchParamsToObject } from "../../../utils/url";
-import { importWebModule } from "../../../utils/webModule";
+import { getPathURLByURLObject, getAbsPathURLObject, urlSearchParamsToObject } from "../../../../utils/url";
+import { importWebModule } from "../../../../utils/webModule";
 
 export function useLoadWebModuleRenderState(props: RenderComponentProps) {
   const ref = useRef<HTMLElement>();

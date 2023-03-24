@@ -1,4 +1,4 @@
-import { RenderComponentProps, RenderTypes, registerRender } from '../..//renderRegistory';
+import { RenderComponentProps, RenderTypes, registerRender } from '../../renderRegistory';
 import { useLoadTextRender } from '../../hooks/useLoadTextRender';
 import React from 'react'
 

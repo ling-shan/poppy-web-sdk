@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAbsPathURLObject, getPathURLByURLObject } from '../../utils/url'
+import { getAbsPathURLObject, getPathURLByURLObject } from '../../../utils/url'
 import { RenderTypes } from './renderRegistory'
 
 import { ProxyRender } from './renders/ProxyRender';
