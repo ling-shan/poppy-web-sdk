@@ -165,25 +165,26 @@ async function loadWebModule(webModuleUrl: string) {
   }
 }
 
-function get(webModuleUrlOrName: string) {
-  const webModuleName = webModuleAliasMap[webModuleUrlOrName] ?? webModuleUrlOrName;
-  return webModuleMap[webModuleName] ?? undefined;
+export function get(webModuleUrlOrName: string) {
+  const webModuleUrl = webModuleAliasMap[webModuleUrlOrName] ?? webModuleUrlOrName;
+  return webModuleMap[webModuleUrl] ?? undefined;
 }
 
-export async function importWebModule(webModuleUrl: string, webModuleName?: string): Promise<WebModule> {
+export function alias(webModuleUrl: string, alias: string) {
+  webModuleAliasMap[alias] = webModuleUrl;
+}
+
+export async function importWebModule(webModuleUrlOrName: string): Promise<WebModule> {
+  const webModuleUrl = webModuleAliasMap[webModuleUrlOrName] ?? webModuleUrlOrName;
   if (webModuleLoadedMap[webModuleUrl]) {
     await webModuleLoadedMap[webModuleUrl];
     return get(webModuleUrl);
   }
 
-  if (webModuleName) {
-    webModuleAliasMap[webModuleName] = webModuleUrl;
-  }
-
   const publicPath = baseURL(webModuleUrl);
 
   const webModule = {
-    moduleName: webModuleName ?? webModuleUrl,
+    moduleName: webModuleUrl,
     publicPath,
     factory: null,
   };
