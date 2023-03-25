@@ -9,5 +9,3 @@ export function PageShell(props: PropsWithChildren) {
     </ConfigProvider>
   );
 }
-
-export default;
