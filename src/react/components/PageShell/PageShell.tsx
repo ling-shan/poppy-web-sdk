@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import './PageShell.module.css';
 import { ConfigProvider } from 'antd';
 
-function PageShell(props: PropsWithChildren) {
+export function PageShell(props: PropsWithChildren) {
   return (
     <ConfigProvider>
       { props.children }
@@ -10,4 +10,4 @@ function PageShell(props: PropsWithChildren) {
   );
 }
 
-export default PageShell;
+export default;
