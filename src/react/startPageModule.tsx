@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { WebModuleFactory } from "../utils/webModule";
-import PageShell from 'react/components/PageShell';
-import NotFoundPage from 'react/components/NotFoundPage';
+import { WebModuleFactory, startWebModule } from "../utils/webModule";
+import PageShell from './components/PageShell';
+import NotFoundPage from './components/NotFoundPage';
 
 interface CreatePageFactoryOpts {
   loadPageComponent(pageName: string): Promise<React.LazyExoticComponent<React.ComponentType<any>>>
@@ -41,4 +41,8 @@ export function createPageFactory(opts: CreatePageFactoryOpts): WebModuleFactory
       render.unmount();
     }
   }
+}
+
+export function startPageModule (opts: CreatePageFactoryOpts) {
+  startWebModule(createPageFactory(opts));
 }
