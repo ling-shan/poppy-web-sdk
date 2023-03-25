@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { RenderComponentProps } from "../renderRegistory";
 import { getPathURLByURLObject, getAbsPathURLObject, urlSearchParamsToObject } from "../../../../utils/url";
-import { importWebModule } from "../../../../utils/webModule";
+import { getWebModuleEntryUrl, importWebModule } from "../../../../utils/webModule";
 
 export function useLoadWebModuleRenderState(props: RenderComponentProps) {
   const ref = useRef<HTMLElement>();
@@ -18,7 +18,12 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
     (async () => {
       props.onStart?.();
       try {
-        const targetUrl =  getAbsPathURLObject(props.url as string);
+        let sourceUrl = props.url as string;
+        // here is the webmodule name
+        if (sourceUrl.startsWith("@")) {
+          sourceUrl = await getWebModuleEntryUrl(sourceUrl)
+        }
+        const targetUrl = getAbsPathURLObject(sourceUrl);
         const targetUrlSearchParams = urlSearchParamsToObject(targetUrl.searchParams);
         const webModuleUrl = getPathURLByURLObject(targetUrl);
         const webModule = await importWebModule(webModuleUrl);

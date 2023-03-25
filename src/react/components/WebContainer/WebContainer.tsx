@@ -6,7 +6,7 @@ import { ProxyRender } from './renders/ProxyRender';
 
 interface WebContainerProps {
   className?: string
-  url?: string
+  url?: string | null
   onLoad?: () => void
   onStart?: () => void
   onError?: () => void
@@ -36,17 +36,22 @@ export function WebContainer(props: WebContainerProps) {
 
   // detect the render
   useEffect(() => {
-    const pathUrl = props.url ? getPathURLByURLObject(getAbsPathURLObject(props.url)) : "";
-    if (pathUrl.endsWith(".html")) {
-      setRenderType(RenderTypes.HTML);
-    } else if (pathUrl.endsWith("asset-manifest.json")) {
+    let pathUrl = props.url ?? "";
+    if (pathUrl.startsWith("@") && pathUrl.length > 1) {
       setRenderType(RenderTypes.WebModule);
-    } else if (pathUrl.endsWith(".md") || pathUrl.endsWith(".markdown")) {
-      setRenderType(RenderTypes.Markdown);
-    } else if (pathUrl.endsWith(".rtext")) {
-      setRenderType(RenderTypes.RichText);
     } else {
-      setRenderType(RenderTypes.None);
+      pathUrl = getPathURLByURLObject(getAbsPathURLObject(pathUrl));
+      if (pathUrl.endsWith(".html")) {
+        setRenderType(RenderTypes.HTML);
+      } else if (pathUrl.endsWith("asset-manifest.json")) {
+        setRenderType(RenderTypes.WebModule);
+      } else if (pathUrl.endsWith(".md") || pathUrl.endsWith(".markdown")) {
+        setRenderType(RenderTypes.Markdown);
+      } else if (pathUrl.endsWith(".rtext")) {
+        setRenderType(RenderTypes.RichText);
+      } else {
+        setRenderType(RenderTypes.None);
+      }
     }
   }, [props.url]);
 

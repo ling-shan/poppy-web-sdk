@@ -20,7 +20,6 @@ interface WebModule {
 
 interface GlobalWebModuleNamespace {
   _: {
-    alias: Record<string, string>
     loadings: Record<string, Promise<void> | undefined>
     modules: Record<string, WebModule>
   },
@@ -32,19 +31,16 @@ let globalWebModuleNamespace: GlobalWebModuleNamespace = (window as any)[globalW
 if (!globalWebModuleNamespace) {
   globalWebModuleNamespace = {
     _: {
-      alias: {},
       loadings: {},
       modules: {},
     },
-    get(webModuleUrlOrName: string):WebModule | undefined {
-      const webModuleName = globalWebModuleNamespace._.alias[webModuleUrlOrName] ?? webModuleUrlOrName;
-      return globalWebModuleNamespace._.modules[webModuleName] ?? undefined;
+    get(webModuleUrl: string):WebModule | undefined {
+      return globalWebModuleNamespace._.modules[webModuleUrl] ?? undefined;
     }
   };
   (window as any)[globalWebModuleNamespaceName] = globalWebModuleNamespace;
 }
 
-const webModuleAliasMap = globalWebModuleNamespace._.alias;
 const webModuleMap = globalWebModuleNamespace._.modules;
 const webModuleLoadedMap = globalWebModuleNamespace._.loadings;
 
@@ -165,17 +161,11 @@ async function loadWebModule(webModuleUrl: string) {
   }
 }
 
-export function get(webModuleUrlOrName: string) {
-  const webModuleUrl = webModuleAliasMap[webModuleUrlOrName] ?? webModuleUrlOrName;
+export function get(webModuleUrl: string) {
   return webModuleMap[webModuleUrl] ?? undefined;
 }
 
-export function alias(webModuleUrl: string, alias: string) {
-  webModuleAliasMap[alias] = webModuleUrl;
-}
-
-export async function importWebModule(webModuleUrlOrName: string): Promise<WebModule> {
-  const webModuleUrl = webModuleAliasMap[webModuleUrlOrName] ?? webModuleUrlOrName;
+export async function importWebModule(webModuleUrl: string): Promise<WebModule> {
   if (webModuleLoadedMap[webModuleUrl]) {
     await webModuleLoadedMap[webModuleUrl];
     return get(webModuleUrl);
@@ -192,6 +182,32 @@ export async function importWebModule(webModuleUrlOrName: string): Promise<WebMo
   webModuleMap[webModuleUrl] = webModule;
   webModuleLoadedMap[webModuleUrl] = loadWebModule(webModuleUrl);
   return webModule;
+}
+
+let webModuleProviderUrl = process.env.REACT_APP_WEB_MODULE_PROVIDER_URL ??
+(window as any).WEB_MODULE_PROVIDER_URL ??
+"http://poppy-api.lingyuan-tech.com/api/poppy/v1/web-modules";
+
+export function setWebModuleProviderUrl(url: string) {
+  webModuleProviderUrl = url;
+}
+
+export async function getWebModuleEntryUrl(webModuleName: string): Promise<string> {
+  if (webModuleName.startsWith("@")) {
+    webModuleName = webModuleName.substring(1);
+  }
+
+  const response = await window.fetch(`${webModuleProviderUrl}/${webModuleName}`);
+  if (!response.ok) {
+    throw new Error("NetworkError");
+  }
+
+  const responseData = await response.json();
+  const entryUrl = responseData.data;
+  if (!entryUrl) {
+    throw new Error("NetworkError");
+  }
+  return entryUrl;
 }
 
 let currentWebModule: WebModule | null;
