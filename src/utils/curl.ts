@@ -16,7 +16,9 @@ export interface HttpServerApiResponse<T = any> {
   data: T
 }
 
-export const baseURL = process.env.REACT_APP_POPPY_API_PREFIX
+export const baseURL = process.env.REACT_APP_POPPY_API_PREFIX ??
+  (window as any).POPPY_API_PREFIX ??
+  "http://poppy-api.lingyuan-tech.com/"
 
 const log = (config: InternalAxiosRequestConfig, ...args: any[]) => {
   const { url = '', baseURL = '', method } = config
@@ -200,7 +202,7 @@ const getToken = (() => {
 const httpServerError = 'http server error'
 
 // 触发事件
-export function dispatchHttpServerErrorEvent(error: unknown) {
+function dispatchHttpServerErrorEvent(error: unknown) {
   if (isIframe) {
     // current iframe
     window.postMessage({ type: httpServerError, detail: error }, '*')
