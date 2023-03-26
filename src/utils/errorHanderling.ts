@@ -9,7 +9,7 @@ if (!eventEmitter) {
   (window as any).$errorHanldingEmitter = eventEmitter;
 }
 
-export function onHandleErrro(callback: HandleErrroFunction): CallableFunction {
+export function onHandleError(callback: HandleErrroFunction): CallableFunction {
   return eventEmitter.on((evt) => {
     callback(evt.payload)
   })
