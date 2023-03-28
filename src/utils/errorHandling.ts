@@ -2,6 +2,7 @@
 import { EventEmitter, createEventEmitter } from "./eventEmitter";
 
 type HandleErrroFunction = (error: unknown) => void | unknown;
+type CleanFunciton = () => void;
 
 let eventEmitter: EventEmitter = (window as any).$errorHanldingEmitter;
 if (!eventEmitter) {
@@ -9,15 +10,26 @@ if (!eventEmitter) {
   (window as any).$errorHanldingEmitter = eventEmitter;
 }
 
-export function onHandleError(callback: HandleErrroFunction): CallableFunction {
-  return eventEmitter.on((evt) => {
-    callback(evt.payload)
-  })
+export interface ErrorHandling {
+  onHandleError(callback: HandleErrroFunction): CleanFunciton
+  handleError(error: unknown): void
 }
 
-/**
- * @param error
- */
-export function handleError(error: unknown) {
-  eventEmitter.emit('error', error);
+class ErrorHandlingImpl implements ErrorHandling {
+  onHandleError(callback: HandleErrroFunction): CleanFunciton {
+    return eventEmitter.on((evt) => {
+      callback(evt.payload)
+    })
+  }
+
+  /**
+   * @param error
+   */
+  handleError(error: unknown) {
+    eventEmitter.emit('error', error);
+  }
 }
+
+export default new ErrorHandlingImpl();
+
+
