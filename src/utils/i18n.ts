@@ -16,6 +16,13 @@ class I18nImpl implements I18n {
 
   loaded = false;
 
+  constructor() {
+    this.messages = (window as any).$i18nMessages ?? null;
+    if (this.messages) {
+      this.loaded = true;
+    }
+  }
+
   private async loadMessage() {
     const appId = storage.getAppId();
     if (!appId) {
@@ -23,6 +30,7 @@ class I18nImpl implements I18n {
     }
     const responseData = await curl(`/api/poppy/v1/i18n-messages/bundles/${appId}`);
     this.messages = responseData.data ?? {};
+    (window as any).$i18nMessages = this.messages;
     this.loadPromise = null;
     this.loaded = true;
   }
