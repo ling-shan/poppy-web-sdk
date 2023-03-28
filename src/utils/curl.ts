@@ -59,7 +59,7 @@ instance.interceptors.response.use(
   (response) => {
     const { data: respData, headers } = response
     // log(config, '请求结果 => ', respData)
-    const { success, data } = respData as HttpServerApiResponse
+    const { success } = respData as HttpServerApiResponse
     if (!success) {
       return Promise.reject(respData)
     }
@@ -81,7 +81,7 @@ instance.interceptors.response.use(
       storage.setAccessToken(assesToken ?? null);
     }
 
-    return data
+    return response
   },
   (error: AxiosError) => {
     // log(error.config, '请求错误 => ', error)
