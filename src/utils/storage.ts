@@ -76,10 +76,10 @@ class StorageImpl implements Storage {
       this.browserStorage.removeItem(KeyNames.Language);
     } else {
       this.browserStorage.setItem(KeyNames.SupportedLanguages, value);
-      const lang = this.browserStorage.getItem(KeyNames.Language);
+      const lang = this.browserStorage.getItem(KeyNames.Language) ?? window.navigator.language;
       const langs = value.split(",");
       if (!lang || !langs.includes(lang)) {
-        this.browserStorage.setItem(KeyNames.Language, langs[0]);
+        this.browserStorage.setItem(KeyNames.Language, langs[0] ?? 'zh-CN');
       }
     }
   }

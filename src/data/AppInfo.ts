@@ -5,7 +5,6 @@ export interface AppInfo {
   logoImg: string
   defaultRoleId: number
   intro: string
-  icpRecordInfo: string
   expireAt: string
   remark: string
   footer: string

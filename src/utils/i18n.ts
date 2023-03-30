@@ -4,10 +4,18 @@ import storage from './storage'
 const Placeholder = '...'
 const MessageReplaceReg = /\${\w+}/g
 
-interface I18n {
+export interface I18nMessage {
+  formatMessage(key: string, map?: Record<string, string>): string
+}
+
+export interface I18n extends I18nMessage {
   load(): Promise<void>
   readonly loaded: boolean
-  formatMessage(key: string, map?: Record<string, string>): string
+}
+
+export interface I18nParamters {
+  key: string
+  map?: Record<string, string>
 }
 
 class I18nImpl implements I18n {
@@ -41,7 +49,7 @@ class I18nImpl implements I18n {
     }
 
     if (this.loadPromise) {
-      await this.loadPromise;
+      return this.loadPromise;
     }
 
     this.loadPromise = this.loadMessage();
@@ -52,16 +60,20 @@ class I18nImpl implements I18n {
       return Placeholder;
     }
 
-    const message = this.messages[key];
-    if (!message) {
-      return Placeholder;
+    if (!key) {
+      return '';
+    }
+
+    const messageText = this.messages[key];
+    if (messageText === undefined) {
+      return key;
     }
 
     if (!map) {
-      return message;
+      return messageText;
     }
 
-    return message.replace(MessageReplaceReg, (matcher) => {
+    return messageText.replace(MessageReplaceReg, (matcher) => {
       // ${retryLockExpireTime}
       const matcherKey = matcher.slice(2, -1);
       return map[matcherKey] ?? '';
@@ -70,5 +82,11 @@ class I18nImpl implements I18n {
 }
 
 const i18n = new I18nImpl();
+
+export const placeholderI18n: I18nMessage = {
+  formatMessage() {
+    return Placeholder;
+  }
+}
 
 export default i18n;

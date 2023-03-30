@@ -81,6 +81,8 @@ instance.interceptors.response.use(
       storage.setAccessToken(assesToken ?? null);
     }
 
+    response.data = response.data.data ?? null;
+
     return response
   },
   (error: AxiosError) => {

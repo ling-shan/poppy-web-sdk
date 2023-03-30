@@ -1,15 +1,22 @@
 import React from 'react';
-import { Button, Result } from 'antd';
+import {  Result } from 'antd';
+
+import { useI18nMessage } from '../../hooks/useI18nMessage';
+import I18nMessageKeys from '../../../utils/I18nMessageKeys';
+
+import styles from './NotFoundPage.module.css'
+import { useDocumentTitleEffect } from '../../hooks/useDocumentTitleEffect';
 
 export default function NotFoundPage() {
+  const i18n = useI18nMessage();
+  useDocumentTitleEffect(I18nMessageKeys.NotFoundPageErrorTitle);
   return (
-    <Result
-      status="404"
-      title="404"
-      subTitle="Sorry, the page you visited does not exist."
-      extra={
-      <Button type="primary">Back Home</Button>
-    }
-  />
+    <div className={styles.main}>
+      <Result
+        status="404"
+        title={i18n.formatMessage(I18nMessageKeys.NotFoundPageErrorTitle)}
+        subTitle={i18n.formatMessage(I18nMessageKeys.NotFoundPageErrorSubTitle)}
+    />
+    </div>
   );
 }
