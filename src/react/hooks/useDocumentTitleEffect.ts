@@ -14,7 +14,7 @@ export function useDocumentTitleEffect(title: string | I18nParamters | null) {
 
     if (typeof title === 'object') {
       i18n.load().then(() => {
-        window.document.title = i18n.formatMessage(title.key, title.map)
+        window.document.title = i18n.formatMessage(title.key, title.params)
       })
     }
   }, [title])

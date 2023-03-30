@@ -15,7 +15,7 @@ export interface I18n extends I18nMessage {
 
 export interface I18nParamters {
   key: string
-  map?: Record<string, string>
+  params?: Record<string, string>
 }
 
 class I18nImpl implements I18n {

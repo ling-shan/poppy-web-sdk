@@ -1,4 +1,4 @@
-import storage from "utils/storage";
+import storage from "../utils/storage";
 import { AuthData } from "../data/AuthData";
 import curl from "../utils/curl"
 
