@@ -5,7 +5,7 @@ const Placeholder = '...'
 const MessageReplaceReg = /\${\w+}/g
 
 export interface I18nMessage {
-  formatMessage(key: string, map?: Record<string, string>): string
+  formatMessage(key: string, params?: Record<string, string>): string
 }
 
 export interface I18n extends I18nMessage {
@@ -48,14 +48,14 @@ class I18nImpl implements I18n {
       return;
     }
 
-    if (this.loadPromise) {
-      return this.loadPromise;
+    if (!this.loadPromise) {
+      this.loadPromise = this.loadMessage();
     }
 
-    this.loadPromise = this.loadMessage();
+    await this.loadPromise;
   }
 
-  formatMessage(key: string, map?: Record<string, string>): string {
+  formatMessage(key: string, params?: Record<string, string>): string {
     if (!this.messages) {
       return Placeholder;
     }
@@ -69,14 +69,14 @@ class I18nImpl implements I18n {
       return key;
     }
 
-    if (!map) {
+    if (!params) {
       return messageText;
     }
 
     return messageText.replace(MessageReplaceReg, (matcher) => {
       // ${retryLockExpireTime}
       const matcherKey = matcher.slice(2, -1);
-      return map[matcherKey] ?? '';
+      return params[matcherKey] ?? '';
     })
   }
 }

@@ -8,6 +8,12 @@ async function getRouteMenuByPath(menuPath: string) {
   return data as Menu
 }
 
+async function getAllRouteMenus() {
+  const { data } = await curl(`/api/poppy/v1/menus/route-menus`)
+  return data as Menu[]
+}
+
 export default {
   getRouteMenuByPath,
+  getAllRouteMenus,
 }

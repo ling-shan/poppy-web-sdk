@@ -11,7 +11,8 @@ export function useI18nMessage(): I18nMessage {
     i18n.load().then(() => {
       setIsLoaded(true);
     })
-  })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return isLoaded ? i18n : placeholderI18n;
 }

@@ -12,16 +12,19 @@ interface ErrorStateProps {
   onRetry?: (() => void) | false
 }
 
-const messagesMap = {
+const statesMap = {
   'unknow-error': {
+    status: "500",
     title: I18nMessageKeys.CommonErrorStateTitle,
     subTitle: I18nMessageKeys.CommonErrorStateSubTitle,
   },
   'notfound': {
+    status: "404",
     title: I18nMessageKeys.CommonNotFoundStateTitle,
     subTitle: I18nMessageKeys.CommonNotFoundStateSubTitle,
   },
   'no-permission': {
+    status: "403",
     title: I18nMessageKeys.CommonNoPermissionStateTitle,
     subTitle: I18nMessageKeys.CommonNoPermissionStateSubTitle,
   }
@@ -29,7 +32,7 @@ const messagesMap = {
 
 export function ErrorState(props: ErrorStateProps) {
   const stateType = props.stateType ?? 'unknow-error';
-
+  const i18nMessage = useI18nMessage();
 
   const retryCallback = useCallback(
     () => {
@@ -42,9 +45,9 @@ export function ErrorState(props: ErrorStateProps) {
     [props],
   )
 
-  const i18n = useI18nMessage();
-
-  const messgaes = messagesMap[stateType] ?? messagesMap['unknow-error'];
+  const state = statesMap[stateType] ?? statesMap['unknow-error'];
+  const titleText = i18nMessage.formatMessage(state.title);
+  const subTitleText = i18nMessage.formatMessage(state.subTitle);
 
   const retryButton = useMemo(() => {
     if (props.onRetry === false) {
@@ -54,17 +57,17 @@ export function ErrorState(props: ErrorStateProps) {
     <Button
       onClick={retryCallback}
       type="primary">
-        {i18n.formatMessage(I18nMessageKeys.CommonRetryText)}
+        {i18nMessage.formatMessage(I18nMessageKeys.CommonRetryText)}
     </Button>
 
-  }, [i18n, props.onRetry, retryCallback])
+  }, [i18nMessage, props.onRetry, retryCallback])
 
   return (
     <div className={styles.main}>
       <Result
-        status="500"
-        title={messgaes.title}
-        subTitle={messgaes.subTitle}
+        status={state.status as any}
+        title={titleText}
+        subTitle={subTitleText}
         extra={retryButton}
       />
     </div>
