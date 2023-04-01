@@ -1,4 +1,4 @@
-import React, { ElementType, FunctionComponent, ReactNode } from "react";
+import React, { ElementType, FunctionComponent } from "react";
 
 export enum RenderTypes {
   HTML = "html",

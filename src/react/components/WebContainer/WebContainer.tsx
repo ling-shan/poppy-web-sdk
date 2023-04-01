@@ -64,6 +64,7 @@ export function WebContainer(props: WebContainerProps) {
         setRenderType(RenderTypes.None);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.url]);
 
   return (
