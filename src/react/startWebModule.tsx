@@ -1,17 +1,18 @@
 import React, { ComponentType, ReactElement } from 'react';
 import ReactDOM from 'react-dom/client';
-import { WebModuleFactoryContext, startWebModule } from "../utils/webModule";
+import { WebModuleFactoryContext } from "../utils/webModuleLoader";
 import WebModule from './components/WebModule';
+import { startWebModule as originStartWebModule } from '../utils/webModuleProvider';
 
 type LazyReactElementFactory = (context?: WebModuleFactoryContext) => Promise<ReactElement>
 
-interface WebModuleOpts {
+interface StartWebModuleOpts {
   wrapper?: ComponentType
   view?: ReactElement | LazyReactElementFactory
 }
 
-export function startup(opts: WebModuleOpts) {
-  startWebModule(async (context) => {
+export function startWebModule(opts: StartWebModuleOpts) {
+  originStartWebModule(async (context) => {
     let webModuleContent: ReactElement = <></>;
     if (React.isValidElement(opts.view)) {
       webModuleContent = opts.view;

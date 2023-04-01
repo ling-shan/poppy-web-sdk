@@ -5,6 +5,10 @@ export function is404Error(error: any) {
     return false;
   }
 
+  if (error.name === 'notfound') {
+    return true;
+  }
+
   if (error.name !== 'AxiosError') {
     return false;
   }
@@ -16,9 +20,17 @@ export function is404Error(error: any) {
   return true;
 }
 
+export function create404Error() {
+  return new Error('notfound');
+}
+
 export function is403Error(error: any) {
   if (!error) {
     return false;
+  }
+
+  if (error.name === 'noPermission') {
+    return true;
   }
 
   if (error.name !== 'AxiosError') {
@@ -32,9 +44,17 @@ export function is403Error(error: any) {
   return true;
 }
 
+export function create403Error() {
+  return new Error('noPermission');
+}
+
 export function is401Error(error: any) {
   if (!error) {
     return false;
+  }
+
+  if (error.name === 'invalidAuth') {
+    return true;
   }
 
   if (error.name !== 'AxiosError') {
@@ -46,4 +66,8 @@ export function is401Error(error: any) {
   }
 
   return true;
+}
+
+export function create401Error() {
+  return new Error('invalidAuth');
 }

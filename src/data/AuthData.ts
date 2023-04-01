@@ -1,6 +1,6 @@
 export interface AuthData {
-  appId: number
-  userId: number
+  appId: string
+  userId: string
   scope: string
   token: string
   accountName: string

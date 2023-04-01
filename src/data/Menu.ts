@@ -36,7 +36,7 @@ export interface TreeItem {
   [key: string]: any
 }
 
-type TreeItemTransformer = (item: TreeItem) => TreeItem;
+type TreeItemTransformer = (item: Menu & TreeItem) => TreeItem;
 
 export function convertMenusToTreeItem(menus: Menu[], parentId?: string, transformer?: TreeItemTransformer): TreeItem[] {
   if (!Array.isArray(menus)) {

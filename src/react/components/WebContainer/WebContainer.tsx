@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAbsPathURLObject, getPathURLByURLObject } from '../../../utils/url'
+import { getAbsPathURLObject, getPathURLByURLObject, objectToSearchParamsStr } from '../../../utils/url'
 import { RenderTypes } from './renderRegistory'
 
 import { ProxyRender } from './renders/ProxyRender';
@@ -7,6 +7,7 @@ import { ProxyRender } from './renders/ProxyRender';
 interface WebContainerProps {
   className?: string
   url?: string | null
+  params?: Record<string, string>
   onLoad?: () => void
   onStart?: () => void
   onError?: () => void
@@ -38,6 +39,16 @@ export function WebContainer(props: WebContainerProps) {
   useEffect(() => {
     let pathUrl = props.url ?? "";
     if (pathUrl.startsWith("@") && pathUrl.length > 1) {
+      if (props.params) {
+        const searchParamsStr = objectToSearchParamsStr(props.params);
+        if (searchParamsStr) {
+          if (pathUrl.includes('?')) {
+            pathUrl = pathUrl + '&' + searchParamsStr;
+          } else {
+            pathUrl = pathUrl + '?' + searchParamsStr;
+          }
+        }
+      }
       setRenderType(RenderTypes.WebModule);
     } else {
       pathUrl = getPathURLByURLObject(getAbsPathURLObject(pathUrl));

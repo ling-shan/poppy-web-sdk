@@ -1,3 +1,3 @@
-export * from './icons'
+export * from './allIcons'
 export * from './Icon'
-export * from './IconSelect'
+export * from './IconSelector'

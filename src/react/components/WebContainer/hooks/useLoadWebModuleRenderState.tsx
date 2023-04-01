@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { RenderComponentProps } from "../renderRegistory";
 import { getPathURLByURLObject, getAbsPathURLObject, urlSearchParamsToObject } from "../../../../utils/url";
-import { getWebModuleEntryUrl, importWebModule } from "../../../../utils/webModule";
+import { webModuleLoader } from "../../../../utils/webModuleLoader";
 
 export function useLoadWebModuleRenderState(props: RenderComponentProps) {
   const ref = useRef<HTMLElement>();
@@ -21,12 +21,12 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
         let sourceUrl = props.url as string;
         // here is the webmodule name
         if (sourceUrl.startsWith("@")) {
-          sourceUrl = await getWebModuleEntryUrl(sourceUrl)
+          sourceUrl = await webModuleLoader.getWebModuleEntryUrl(sourceUrl)
         }
         const targetUrl = getAbsPathURLObject(sourceUrl);
         const targetUrlSearchParams = urlSearchParamsToObject(targetUrl.searchParams);
         const webModuleUrl = getPathURLByURLObject(targetUrl);
-        const webModule = await importWebModule(webModuleUrl);
+        const webModule = await webModuleLoader.importWebModule(webModuleUrl);
         if (typeof webModule.factory === "function") {
           webModuleInstClean = await webModule.factory({
             container,
@@ -42,6 +42,7 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
     return () => {
       webModuleInstClean?.();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.url])
 
   return ref;

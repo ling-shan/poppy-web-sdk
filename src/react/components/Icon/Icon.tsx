@@ -1,5 +1,5 @@
 import React from 'react'
-import { icons } from './icons'
+import { icons } from './allIcons'
 import { IconComponentProps } from '@ant-design/icons/lib/components/Icon'
 
 const convertTypeToIconPath = (type: string) => {

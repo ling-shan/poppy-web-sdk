@@ -3,7 +3,7 @@ export interface AppInfo {
   id: string
   name: string
   logoImg: string
-  defaultRoleId: number
+  defaultRoleId: string
   intro: string
   expireAt: string
   remark: string

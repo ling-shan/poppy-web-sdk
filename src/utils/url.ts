@@ -28,6 +28,16 @@ export function urlSearchParamsToObject(searchParams: URLSearchParams, blockList
   return results;
 }
 
+export function objectToSearchParamsStr(pamras: Record<string, any>) {
+  if (!pamras) {
+    return '';
+  }
+
+  return Object.keys(pamras).map(key => {
+    return `key=${pamras[key] ?? ''}`
+  }).join('&')
+}
+
 export function getConcatURLObject(url: string, baseURL: string) {
   return new URL((url), baseURL).href;
 }

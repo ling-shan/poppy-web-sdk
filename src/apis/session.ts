@@ -16,7 +16,13 @@ async function create(authToken: string) {
   return data as AuthData
 }
 
+async function getAll() {
+  const { data } = await curl(`/api/poppy/v1/sessions`);
+  return (data ?? []) as AuthData[]
+}
+
 export default {
   getCurrent,
-  create
+  create,
+  getAll,
 }

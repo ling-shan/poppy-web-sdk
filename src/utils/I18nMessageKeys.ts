@@ -8,6 +8,7 @@ export default {
 
   // Retry
   CommonRetryText: 'ui.common.retry.text',
+  CommonHomePageText: 'ui.common.homepage.text',
 
   // components
 

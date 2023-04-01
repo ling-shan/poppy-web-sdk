@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { Input, Modal, Tabs } from 'antd'
 import classnames from 'classnames'
 import { Icon } from './Icon'
-import classes from './index.module.css'
+import classes from './IconSelector.module.css'
 import React from 'react'
+
+//TODO this title text need to covered i18n
 
 const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   {
