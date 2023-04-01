@@ -72,6 +72,7 @@ export function WebContainer(props: WebContainerProps) {
       <ProxyRender
         renderType={renderType}
         url={props.url ?? ""}
+        params={props.params}
         onLoad={props.onLoad}
         onError={props.onError}
         onStart={props.onStart}/>
