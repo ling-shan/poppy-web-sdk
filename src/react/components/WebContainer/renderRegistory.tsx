@@ -10,6 +10,8 @@ export enum RenderTypes {
 
 export interface RenderComponentProps {
   url: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: Record<string, any>
   onStart?: () => void
   onLoad?: () => void
   onError?: () => void

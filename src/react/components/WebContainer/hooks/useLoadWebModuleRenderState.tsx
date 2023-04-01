@@ -24,14 +24,17 @@ export function useLoadWebModuleRenderState(props: RenderComponentProps) {
           sourceUrl = await webModuleLoader.getWebModuleEntryUrl(sourceUrl)
         }
         const targetUrl = getAbsPathURLObject(sourceUrl);
-        const targetUrlSearchParams = urlSearchParamsToObject(targetUrl.searchParams);
+        const params = {
+          ...urlSearchParamsToObject(targetUrl.searchParams),
+          ...props.params,
+        }
         const webModuleUrl = getPathURLByURLObject(targetUrl);
         const webModule = await webModuleLoader.importWebModule(webModuleUrl);
         if (typeof webModule.factory === "function") {
           webModuleInstClean = await webModule.factory({
             container,
             webModule,
-            params: targetUrlSearchParams
+            params: params
           })
           props.onLoad?.();
         }

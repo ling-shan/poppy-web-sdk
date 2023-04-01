@@ -17,10 +17,10 @@ export function ProxyRender(props: ProxyRenderProps) {
     const RenderComponent = getRegisteredRender(props.renderType);
 
     return (
-      <RenderComponent url={props.url}
+      <RenderComponent url={props.url} params={props.params}
         onLoad={props.onLoad}
         onError={props.onError}
         onStart={props.onStart} />
     );
-  }, [props.renderType, props.url, props.onLoad, props.onError, props.onStart]);
+  }, [props.renderType, props.url, props.params, props.onLoad, props.onError, props.onStart]);
 }
