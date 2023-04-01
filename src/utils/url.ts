@@ -34,7 +34,7 @@ export function objectToSearchParamsStr(pamras: Record<string, any>) {
   }
 
   return Object.keys(pamras).map(key => {
-    return `key=${pamras[key] ?? ''}`
+    return `${key}=${pamras[key] ?? ''}`
   }).join('&')
 }
 
