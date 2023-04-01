@@ -224,6 +224,10 @@ class WebModuleLoaderImpl implements WebModuleLoader {
 
 export const webModuleLoader = window.webModuleLoader ?? new WebModuleLoaderImpl();
 
+if (!window.webModuleLoader) {
+  window.webModuleLoader = webModuleLoader;
+}
+
 
 
 

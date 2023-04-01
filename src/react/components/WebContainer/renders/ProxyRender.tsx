@@ -22,5 +22,5 @@ export function ProxyRender(props: ProxyRenderProps) {
         onError={props.onError}
         onStart={props.onStart} />
     );
-  }, [props.url, props.renderType]);
+  }, [props.renderType, props.url, props.onLoad, props.onError, props.onStart]);
 }

@@ -19,7 +19,9 @@ const remarkPlugins = [
 export function MarkdownRender(props: RenderComponentProps) {
   const content = useLoadTextRender(props);
   return (
-    <ReactMarkdown children={content} remarkPlugins={remarkPlugins}/>
+    <ReactMarkdown remarkPlugins={remarkPlugins}>
+      {content}
+    </ReactMarkdown>
   );
 }
 
