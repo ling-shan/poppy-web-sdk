@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { WebModuleFactoryContext } from "../utils/webModuleLoader";
 import WebModule from './components/WebModule';
 import { startWebModule as originStartWebModule } from '../utils/webModuleProvider';
-import permissionManager from 'utils/permissionManager';
 
 type LazyReactElementFactory = (context?: WebModuleFactoryContext) => Promise<ReactElement>
 
