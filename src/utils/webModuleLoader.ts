@@ -27,6 +27,10 @@ const DefaultWebModuleProviderUrl = process.env.REACT_APP_WEB_MODULE_PROVIDER_UR
 (window as any).WEB_MODULE_PROVIDER_URL ??
 "http://poppy-api.lingyuan-tech.com/api/poppy/v1/web-modules";
 
+if (!(window as any).WEB_MODULE_PROVIDER_URL) {
+  (window as any).WEB_MODULE_PROVIDER_URL = DefaultWebModuleProviderUrl;
+}
+
 export interface WebModuleLoader {
   getWebModuleProviderUrl(): string;
   setWebModuleProviderUrl(url: string): void;
