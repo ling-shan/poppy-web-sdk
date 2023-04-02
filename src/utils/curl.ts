@@ -3,7 +3,7 @@ import axios, {
   AxiosError,
 } from 'axios'
 
-import storage from './storage';
+import storageManager from './storageManager';
 import errorHandling from './errorHandling';
 
 export interface HttpServerApiResponse<T = any> {
@@ -36,13 +36,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config) => {
     // 设置 token
-    const accessToken = storage.getAccessToken()
+    const accessToken = storageManager.getAccessToken()
     if (accessToken) {
       config.headers["Authorization"] =  `Bearer ${accessToken}`;
     }
 
     // 设置语言
-    const lang = storage.getLanguage();
+    const lang = storageManager.getLanguage();
     if (lang) {
       config.headers['X-Language'] = lang;
     }
@@ -67,18 +67,18 @@ instance.interceptors.response.use(
     // update app id
     const appId = headers['x-set-app-id'];
     if (appId !== undefined) {
-      storage.setAppId(appId);
+      storageManager.setAppId(appId);
     }
 
     const supportedLangs = headers['x-set-supported-langs'];
     if (supportedLangs !== undefined) {
-      storage.setSupportedLanguages(supportedLangs);
+      storageManager.setSupportedLanguages(supportedLangs);
     }
 
     // update access token
     const assesToken = headers['x-set-access-token'];
     if (assesToken !== undefined) {
-      storage.setAccessToken(assesToken ?? null);
+      storageManager.setAccessToken(assesToken ?? null);
     }
 
     response.data = response.data.data ?? null;

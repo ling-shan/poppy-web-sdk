@@ -1,5 +1,5 @@
 import curl from './curl'
-import storage from './storage'
+import storageManager from './storageManager'
 
 const Placeholder = '...'
 const MessageReplaceReg = /\${\w+}/g
@@ -32,7 +32,7 @@ class I18nImpl implements I18n {
   }
 
   private async loadMessage() {
-    const appId = storage.getAppId();
+    const appId = storageManager.getAppId();
     if (!appId) {
       throw new Error("InvalidAppId");
     }

@@ -38,4 +38,8 @@ export function startWebModule(factory: WebModuleFactory): void {
   currentWebModule.factory = factory;
 }
 
+export function isWebModule() {
+  return !!currentWebModule;
+}
+
 

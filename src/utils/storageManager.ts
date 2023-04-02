@@ -5,7 +5,7 @@ const KeyNames = {
   SupportedLanguages: 'poppySupportedLangs'
 }
 
-export interface Storage {
+export interface StorageManager {
   setAppId(value: string):void;
   getAppId(): string | null;
 
@@ -19,7 +19,7 @@ export interface Storage {
   set(key: string, value: string): void
 }
 
-class StorageImpl implements Storage {
+class StorageManagerImpl implements StorageManager {
   private browserStorage = window.localStorage;
 
   set(key: string, value: string) {
@@ -89,7 +89,7 @@ class StorageImpl implements Storage {
   }
 }
 
-export default new StorageImpl()
+export default new StorageManagerImpl()
 
 
 

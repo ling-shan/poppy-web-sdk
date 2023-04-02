@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+export function isRequestError(error: any) {
+  if (error.name !== 'AxiosError') {
+    return true;
+  }
+
+  return false;
+}
+
+
 export function is404Error(error: any) {
   if (!error) {
     return false;

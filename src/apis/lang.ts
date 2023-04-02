@@ -1,9 +1,9 @@
 import curl from "../utils/curl"
-import storage from "../utils/storage";
+import storageManager from "../utils/storageManager";
 import { Lang } from "../data/Lang";
 
 async function getLangBundle()  {
-  const appId = storage.getAppId();
+  const appId = storageManager.getAppId();
   const response = await curl(`/api/poppy/v1/langs/bundles/${appId}`)
   return (response.data ?? []) as Lang[];
 }

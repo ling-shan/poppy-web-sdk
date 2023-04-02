@@ -6,7 +6,9 @@
 export default {
   // common
 
-  // Retry
+  CommonUnknowErrorText: 'ui.common.unknown-error.text',
+  CommonNetWorkErrorText: 'ui.common.network-error.text',
+
   CommonRetryText: 'ui.common.retry.text',
   CommonHomePageText: 'ui.common.homepage.text',
 
