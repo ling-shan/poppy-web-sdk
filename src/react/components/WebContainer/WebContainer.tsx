@@ -7,7 +7,8 @@ import { ProxyRender } from './renders/ProxyRender';
 interface WebContainerProps {
   className?: string
   url?: string | null
-  params?: Record<string, string>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: Record<string, any>
   onLoad?: () => void
   onStart?: () => void
   onError?: () => void

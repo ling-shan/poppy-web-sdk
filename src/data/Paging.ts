@@ -7,3 +7,5 @@ export interface PagingResult<T = any> {
   totalCount: number
   list: T[]
 }
+
+export const DefaultPageSize = 20;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-type PermissionsData = Record<string, any>;
+export type PermissionsData = Record<string, any>;
 
 interface PermissionManager {
   setPermissions(permissions: PermissionsData): void

@@ -1,3 +1,5 @@
+import { PermissionsData } from "../utils/permissionManager"
+
 export interface Menu {
   id: string
   name: string
@@ -60,4 +62,17 @@ export function convertMenusToTreeItem(menus: Menu[], parentId?: string, transfo
   return targetRouteMenus.sort((a, b) => {
     return b.sort - a.sort;
   });
+}
+
+export function convertMenusToPermissions(menus: Menu[]): PermissionsData {
+  if (!Array.isArray(menus)) {
+    return {};
+  }
+
+  const permissions:PermissionsData = {};
+  menus.forEach((menu) => {
+    permissions[menu.menuCode] = true;
+  })
+
+  return permissions;
 }
