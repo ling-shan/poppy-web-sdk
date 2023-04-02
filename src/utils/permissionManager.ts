@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import appENV from "./appEnv";
+
 export type PermissionsData = Record<string, any>;
 
 interface PermissionManager {
@@ -56,6 +58,10 @@ class PermissionManagerImpl implements PermissionManager {
   }
 
   hasPermission(key: string): boolean {
+    if (appENV.dev && appENV.debug) {
+      return true;
+    }
+
     return !!this.mergedPermisions[key];
   }
 }

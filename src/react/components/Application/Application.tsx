@@ -9,9 +9,9 @@ import errorHandling from '../../../utils/errorHandling'
 import toastMessage from '../../../utils/toastMessage'
 import i18n from "../../../utils/i18n";
 import I18nMessageKeys from "../../../utils/I18nMessageKeys";
-import { isWebModule } from "../../../utils/webModuleProvider";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { isRequestError } from "../../../utils/error";
+import appENV from "../../../utils/appEnv";
 
 function initStyles() {
   // init load styles
@@ -75,7 +75,7 @@ export function Application(props: PropsWithChildren) {
 
   // first inital for the appplication
   useEffect(() => {
-    if (isWebModule()) {
+    if (appENV.webModule) {
       return;
     }
 

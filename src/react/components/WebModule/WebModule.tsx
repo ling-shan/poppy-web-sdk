@@ -1,12 +1,11 @@
 import React, { PropsWithChildren } from 'react';
-import './WebModule.module.css';
-import { ConfigProvider } from 'antd';
+import Application from '../Application';
 
 export function WebModule(props: PropsWithChildren) {
   return (
-    <ConfigProvider>
+    <Application>
       { props.children }
-    </ConfigProvider>
+    </Application>
   );
 }
 

@@ -2,10 +2,14 @@ const KeyNames = {
   AppId: 'poppyAppId',
   AccessToken: 'poppyToken',
   Language: 'poppyLang',
-  SupportedLanguages: 'poppySupportedLangs'
+  SupportedLanguages: 'poppySupportedLangs',
+  LastVisitedMenuCode: 'lastVisitedMenuCode'
 }
 
 export interface StorageManager {
+  get(key: string | null): string | null;
+  set(key: string, value: string): void
+
   setAppId(value: string):void;
   getAppId(): string | null;
 
@@ -15,8 +19,8 @@ export interface StorageManager {
   setLanguage(value: string | null):void
   getLanguage(): string | null;
 
-  get(key: string | null): string | null;
-  set(key: string, value: string): void
+  setLastVisitedMenuCode(value: string):void;
+  getLastVisitedMenuCode(): string | null;
 }
 
 class StorageManagerImpl implements StorageManager {
@@ -86,6 +90,14 @@ class StorageManagerImpl implements StorageManager {
 
   getSupportedLanguages() {
     return this.browserStorage.getItem(KeyNames.SupportedLanguages);
+  }
+
+  setLastVisitedMenuCode(value: string):void {
+    this.browserStorage.setItem(KeyNames.LastVisitedMenuCode, value);
+  }
+
+  getLastVisitedMenuCode(): string | null {
+    return this.browserStorage.getItem(KeyNames.LastVisitedMenuCode);
   }
 }
 

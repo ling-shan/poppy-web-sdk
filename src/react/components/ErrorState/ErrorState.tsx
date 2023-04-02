@@ -15,18 +15,18 @@ interface ErrorStateProps {
 const statesMap = {
   'unknow-error': {
     status: "500",
-    title: I18nMessageKeys.CommonErrorStateTitle,
-    subTitle: I18nMessageKeys.CommonErrorStateSubTitle,
+    title: I18nMessageKeys.ErrorStateUnknownErrorTitle,
+    subTitle: I18nMessageKeys.ErrorStateUnknownErrorSubTitle,
   },
   'notfound': {
     status: "404",
-    title: I18nMessageKeys.CommonNotFoundStateTitle,
-    subTitle: I18nMessageKeys.CommonNotFoundStateSubTitle,
+    title: I18nMessageKeys.ErrorStateNotFoundErrorTitle,
+    subTitle: I18nMessageKeys.ErrorStateNotFoundSubTitle,
   },
   'no-permission': {
     status: "403",
-    title: I18nMessageKeys.CommonNoPermissionStateTitle,
-    subTitle: I18nMessageKeys.CommonNoPermissionStateSubTitle,
+    title: I18nMessageKeys.ErrorStateNoPermissionTitle,
+    subTitle: I18nMessageKeys.ErrorStateNoPermissionSubTitle,
   }
 }
 
