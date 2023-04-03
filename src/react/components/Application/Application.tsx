@@ -12,6 +12,7 @@ import I18nMessageKeys from "../../../utils/I18nMessageKeys";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { isRequestError } from "../../../utils/error";
 import appENV from "../../../utils/appEnv";
+import { ReactElement } from "react-markdown/lib/react-markdown";
 
 function initStyles() {
   // init load styles
@@ -70,26 +71,30 @@ function initToastMessage(messageAPI: MessageInstance) {
   })
 }
 
-export function Application(props: PropsWithChildren) {
+function AppInitLayer(props: PropsWithChildren) {
   const { message } = App.useApp();
-
   // first inital for the appplication
   useEffect(() => {
     if (appENV.webModule) {
       return;
     }
-
     initStyles();
     initToastMessage(message);
     initErrorhandling();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  return props.children as ReactElement
+}
+
+export function Application(props: PropsWithChildren) {
   return (
     <ErrorBoundary>
       <ConfigProvider>
         <App>
-          { props.children }
+          <AppInitLayer>
+            { props.children }
+          </AppInitLayer>
         </App>
       </ConfigProvider>
     </ErrorBoundary>

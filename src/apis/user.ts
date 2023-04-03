@@ -35,11 +35,17 @@ async function get(id: string) {
   return response.data as User
 }
 
+async function getCurrent() {
+  const response = await curl.get(`/api/poppy/v1/users/current`);
+  return response.data as User
+}
+
 async function del(id: string) {
   await curl.delete(`/api/poppy/v1/users/${id}`);
 }
 
 export default {
+  getCurrent,
   list,
   create,
   get,
