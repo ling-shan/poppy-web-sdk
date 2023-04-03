@@ -1,6 +1,10 @@
 export interface AppInfo {
-  domain: string
   id: string
+  status: number
+  createAt: string
+  updateAt: string
+
+  domain: string
   name: string
   logoImg: string
   defaultRoleId: string
@@ -9,7 +13,4 @@ export interface AppInfo {
   remark: string
   footer: string
   footerExt: string
-  status: number
-  createAt: string
-  updateAt: string
 }

@@ -2,6 +2,11 @@ import { PermissionsData } from "../utils/permissionManager"
 
 export interface Menu {
   id: string
+  appId: string
+  status: number
+  createAt: string
+  updateAt: string
+
   name: string
   menuCode: string
   parentId: string

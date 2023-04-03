@@ -5,6 +5,8 @@ export type PagingParams<T = any> = {
 
 export interface PagingResult<T = any> {
   totalCount: number
+  pageNum: number
+  pageSize: number
   list: T[]
 }
 

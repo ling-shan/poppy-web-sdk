@@ -1,11 +1,13 @@
-export interface Lang {
+export interface Role {
   id: string
   appId: string
   status: number
   createAt: string
   updateAt: string
 
-  locale: string
+  level: number
   name: string
   remark: string
+  parentId: string
+  confidentialLevel: number
 }

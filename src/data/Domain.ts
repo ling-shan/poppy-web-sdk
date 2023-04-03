@@ -1,11 +1,10 @@
-export interface Lang {
+export interface Domain {
   id: string
   appId: string
   status: number
   createAt: string
   updateAt: string
 
-  locale: string
-  name: string
+  domain: string
   remark: string
 }

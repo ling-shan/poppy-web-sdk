@@ -1,6 +1,7 @@
 
 import curl from "../utils/curl"
 import { Menu } from "../data/Menu";
+import { PagingParams } from "../data/Paging";
 
 
 async function getRouteMenuByMenuCode(menuCode: string) {
@@ -22,8 +23,55 @@ async function getAllRouteMenus() {
   return data as Menu[]
 }
 
+interface CreateOrUpdateParams {
+  name: string,
+  menuCode: string,
+  parentId?: string,
+  menuData?: string,
+  confidentialLevel?: number,
+  menuType: number,
+  linkUrl?: string,
+  icon?: string,
+  sort?: 0,
+  remark?: string,
+  status?: 0
+}
+
+interface ListParams {
+  name?: string,
+  status?: number
+}
+
+// async function list(params: PagingParams<ListParams>) {
+//   const response = await curl.get(`/api/poppy/v1/roles`, { params, });
+//   return response.data as PagingResult<Role>
+// }
+
+async function create(params: CreateOrUpdateParams) {
+  await curl.post(`/api/poppy/v1/roles`, params);
+}
+
+async function update(id: string, params: CreateOrUpdateParams) {
+  await curl.put(`/api/poppy/v1/roles/${id}`, params);
+}
+
+async function get(id: string) {
+  const response = await curl.get(`/api/poppy/v1/roles/${id}`);
+  return response.data as Menu
+}
+
+async function del(id: string) {
+  await curl.delete(`/api/poppy/v1/roles/${id}`);
+}
+
 export default {
   getRouteMenuByMenuCode,
   getAllRouteMenus,
   getRouteMenuPermissions,
+
+  // list,
+  create,
+  get,
+  update,
+  del,
 }
