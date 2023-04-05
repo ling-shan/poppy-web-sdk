@@ -6,6 +6,13 @@ import { PagingParams, PagingResult } from "../data/Paging";
 
 async function getByDomain() {
   const response = await curl(`/api/poppy/v1/apps/domains/${encodeURIComponent(getClientDomain())}`)
+
+  const lookAndFeel = response.data.lookAndFeel ? JSON.parse(response.data.lookAndFeel) : null;
+  response.data.lookAndFeel = lookAndFeel;
+
+  const footerExt = response.data.footerExt ? JSON.parse(response.data.footerExt) : null;
+  response.data.footerExt = footerExt;
+
   return response.data as AppInfo;
 }
 

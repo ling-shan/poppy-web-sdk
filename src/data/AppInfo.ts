@@ -4,6 +4,7 @@ export interface AppInfo {
   createAt: string
   updateAt: string
 
+  lookAndFeel: Record<string, any> | null
   domain: string
   name: string
   logoImg: string
@@ -12,5 +13,5 @@ export interface AppInfo {
   expireAt: string
   remark: string
   footer: string
-  footerExt: string
+  footerExt: Record<string, any> | null
 }

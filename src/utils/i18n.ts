@@ -64,9 +64,9 @@ class I18nImpl implements I18n {
       return '';
     }
 
-    const messageText = this.messages[key];
+    let messageText = this.messages[key];
     if (messageText === undefined) {
-      return key;
+      messageText = key;
     }
 
     if (!params) {
