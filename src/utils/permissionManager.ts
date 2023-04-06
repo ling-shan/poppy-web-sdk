@@ -5,15 +5,17 @@ import appENV from "./appEnv";
 export type PermissionsData = Record<string, any>;
 
 interface PermissionManager {
+  setDebug(value: boolean): void
   setPermissions(permissions: PermissionsData): void
-  pushPermissions(permissions: PermissionsData): void
-  popPermissions(): PermissionsData | undefined
+  // pushPermissions(permissions: PermissionsData): void
+  // popPermissions(): PermissionsData | undefined
   hasPermission(key: string): boolean;
 }
 
 class PermissionManagerImpl implements PermissionManager {
   private mergedPermisions: PermissionsData;
   private permisionsStack: PermissionsData[];
+  private debug = false;
 
   constructor() {
     this.mergedPermisions = {};
@@ -26,6 +28,10 @@ class PermissionManagerImpl implements PermissionManager {
       Object.assign(mergedPermisions, permisionsItem);
     })
     this.mergedPermisions = mergedPermisions;
+  }
+
+  setDebug(value: boolean): void {
+    this.debug = value;
   }
 
   setPermissions(permissions: PermissionsData): void {
@@ -58,7 +64,7 @@ class PermissionManagerImpl implements PermissionManager {
   }
 
   hasPermission(key: string): boolean {
-    if (appENV.dev && appENV.debug) {
+    if (this.debug || (appENV.dev && appENV.debug)) {
       return true;
     }
 
