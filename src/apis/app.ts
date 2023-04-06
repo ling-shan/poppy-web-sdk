@@ -58,6 +58,11 @@ async function get(id: string) {
   return response.data as AppInfo
 }
 
+async function getCurrent() {
+  const response = await curl.get(`/api/poppy/v1/apps/current`);
+  return response.data as AppInfo
+}
+
 async function del(id: string) {
   await curl.delete(`/api/poppy/v1/apps/${id}`);
 }
@@ -65,7 +70,7 @@ async function del(id: string) {
 export default {
   getByDomain,
   getByDomainWithCache,
-
+  getCurrent,
   list,
   create,
   get,
