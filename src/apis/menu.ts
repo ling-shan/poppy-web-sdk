@@ -1,8 +1,6 @@
 
 import curl from "../utils/curl"
 import { Menu } from "../data/Menu";
-import { PagingParams } from "../data/Paging";
-
 
 async function getRouteMenuByMenuCode(menuCode: string) {
   const { data } = await curl(`/api/poppy/v1/menus/route-menus/menuCode`, {
@@ -21,6 +19,18 @@ async function getRouteMenuPermissions(id: string) {
 async function getAllRouteMenus() {
   const { data } = await curl(`/api/poppy/v1/menus/route-menus`)
   return data as Menu[]
+}
+
+let getAllRouteMenusPromise: Promise<Menu[]>;
+
+async function getAllRouteMenusWithCache() {
+  if (getAllRouteMenusPromise) {
+    return getAllRouteMenusPromise;
+  }
+
+  getAllRouteMenusPromise = getAllRouteMenus();
+
+  return getAllRouteMenusPromise;
 }
 
 interface CreateOrUpdateParams {
@@ -67,8 +77,8 @@ async function del(id: string) {
 export default {
   getRouteMenuByMenuCode,
   getAllRouteMenus,
+  getAllRouteMenusWithCache,
   getRouteMenuPermissions,
-
   // list,
   create,
   get,

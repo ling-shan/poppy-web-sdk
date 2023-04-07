@@ -10,9 +10,7 @@ export interface Menu {
   name: string
   menuCode: string
   parentId: string
-  menuPath: string
-  menuData: string
-  menuDataType: string
+  position:  number
   level: number
   confidentialLevel: number
   menuType: number
@@ -27,6 +25,11 @@ export enum MenuType {
   Menu = 0,
   Page = 1,
   Button = 2
+}
+
+export enum MenuPosition {
+  Side = 0,
+  Avatar = 1,
 }
 
 function findChildrnMenusByParentId(menus: Menu[], parentId: string, ) {

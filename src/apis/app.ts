@@ -19,6 +19,10 @@ async function getByDomain() {
 let getByDomainPromise: Promise<AppInfo>;
 
 async function getByDomainWithCache() {
+  if (getByDomainPromise) {
+    return getByDomainPromise;
+  }
+
   getByDomainPromise = getByDomain();
   return getByDomainPromise;
 }
