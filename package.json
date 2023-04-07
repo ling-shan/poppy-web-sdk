@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ling-shan/poppy-web-container.git"
+    "url": "git+https://github.com/ling-shan/poppy-web-sdk.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ling-shan/poppy-web-container/issues"
+    "url": "https://github.com/ling-shan/poppy-web-sdk/issues"
   },
-  "homepage": "https://github.com/ling-shan/poppy-web-container#readme",
+  "homepage": "https://github.com/ling-shan/poppy-web-sdk#readme",
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@commitlint/cli": "^17.4.4",
