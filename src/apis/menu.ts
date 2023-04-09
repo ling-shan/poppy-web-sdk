@@ -36,22 +36,42 @@ async function getAllRouteMenusWithCache() {
 type CreateOrUpdateParams = Partial<Menu>
 type ListParams = Partial<Menu>
 
-// async function list(params: PagingParams<ListParams>) {
-//   const response = await curl.get(`/api/poppy/v1/roles`, { params, });
-//   return response.data as PagingResult<Role>
-// }
 
 async function create(params: CreateOrUpdateParams) {
-  await curl.post(`/api/poppy/v1/roles`, params);
+  await curl.post(`/api/poppy/v1/menus`, params);
 }
 
 async function update(id: string, params: CreateOrUpdateParams) {
-  await curl.put(`/api/poppy/v1/roles/${id}`, params);
+  await curl.put(`/api/poppy/v1/menus/${id}`, params);
 }
 
 async function get(id: string) {
-  const response = await curl.get(`/api/poppy/v1/roles/${id}`);
+  const response = await curl.get(`/api/poppy/v1/menus/${id}`);
   return response.data as Menu
+}
+
+async function list(params: ListParams) {
+  const response = await curl.get(`/api/poppy/v1/menus`, { params });
+  return response.data as Menu[]
+}
+
+async function getMenusByParentId(parentId: string) {
+  const response = await curl.get(`/api/poppy/v1/menus/parent/${parentId}`);
+  return response.data as Menu[]
+}
+
+async function getMenusByRoleId(roleId: string) {
+  const response = await curl.get(`/api/poppy/v1/menus/roles/${roleId}`);
+  return response.data as Menu[]
+}
+
+interface RoleMenuPermissions {
+  menuId: string[]
+  operate: ("cancel" | "empower")[]
+}
+
+async function updateMenusPermissionsByRoleId(roleId: string, menuPermissions: RoleMenuPermissions) {
+  await curl.put(`/api/poppy/v1/menus/roles/${roleId}`, menuPermissions);
 }
 
 async function del(id: string) {
@@ -63,9 +83,12 @@ export default {
   getAllRouteMenus,
   getAllRouteMenusWithCache,
   getRouteMenuPermissions,
-  // list,
   create,
   get,
   update,
   del,
+  list,
+  getMenusByParentId,
+  getMenusByRoleId,
+  updateMenusPermissionsByRoleId,
 }
