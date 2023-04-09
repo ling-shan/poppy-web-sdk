@@ -2,14 +2,7 @@ import { OperationLog } from "../data/OperationLog";
 import { PagingParams, PagingResult } from "../data/Paging";
 import curl from "../utils/curl";
 
-interface ListParams {
-  operator?: string,
-  actionName?: string
-  actionStatus?: string
-  requestUrl?: string
-  requestIp?: string
-  responseHttpCode?: string
-}
+type ListParams = Partial<OperationLog>
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/operation-logs`, { params, });

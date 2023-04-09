@@ -16,18 +16,9 @@ async function getLangBundleWithCache() {
   return getLangsPromise;
 }
 
-interface CreateOrUpdateParams {
-  locale: string,
-  name: string,
-  remark?: string
-}
+type CreateOrUpdateParams = Partial<Lang>
 
-
-interface CreateLangParams {
-  locale: string,
-  name: string,
-  remark?: string
-}
+type CreateLangParams = Partial<Lang>
 
 async function list(params: PagingParams) {
   const response = await curl.get(`/api/poppy/v1/langs`, { params, });

@@ -32,10 +32,7 @@ class I18nImpl implements I18n {
   }
 
   private async loadMessage() {
-    const appId = storageManager.getAppId();
-    if (!appId) {
-      throw new Error("InvalidAppId");
-    }
+    const appId = storageManager.getAppId() ?? '0';
     const responseData = await curl(`/api/poppy/v1/i18n-messages/bundles/${appId}`);
     this.messages = responseData.data ?? {};
     (window as any).$i18nMessages = this.messages;

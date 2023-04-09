@@ -2,16 +2,9 @@ import { PagingParams, PagingResult } from "../data/Paging";
 import { Config } from "../data/Config";
 import curl from "../utils/curl"
 
-interface CreateOrUpdateParams {
-  key: number,
-  value: number,
-  remark?: string
-}
+type CreateOrUpdateParams = Partial<Config>
 
-interface ListParams {
-  key?: string,
-  value?: string
-}
+type ListParams = Partial<Config>;
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/configs`, { params, });

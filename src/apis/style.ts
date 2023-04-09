@@ -9,16 +9,8 @@ async function getStyleBundle() {
   return (response.data ?? {}) as StyleBundle;
 }
 
-interface CreateOrUpdateParams {
-  key: number,
-  value: number,
-  remark?: string
-}
-
-interface ListParams {
-  key?: string,
-  value?: string
-}
+type CreateOrUpdateParams = Partial<Style>
+type ListParams = Partial<Style>
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/styles`, { params, });

@@ -2,16 +2,9 @@ import { Domain } from "../data/Domain";
 import { PagingParams, PagingResult } from "../data/Paging";
 import curl from "../utils/curl"
 
-interface CreateOrUpdateParams {
-  domain: string
-  remark?: string
-  status?: number
-}
+type CreateOrUpdateParams = Partial<Domain>
 
-interface ListParams {
-  domain?: string,
-  status?: number
-}
+type ListParams = Partial<Domain>;
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/domains`, { params, });

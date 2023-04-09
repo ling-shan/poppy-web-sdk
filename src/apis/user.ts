@@ -2,20 +2,9 @@ import { User } from "../data/User";
 import { PagingParams, PagingResult } from "../data/Paging";
 import curl from "../utils/curl"
 
-interface CreateOrUpdateParams {
-  accountName: string
-  phoneNo: string | null
-  email: string
-  headerImg: string | null,
-  registerIp: string
-}
+type CreateOrUpdateParams = Partial<User>
 
-interface ListParams {
-  status?: number
-  accountName?: string
-  phoneNo?: string
-  email?: string
-}
+type ListParams = Partial<User>
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/users`, { params, });

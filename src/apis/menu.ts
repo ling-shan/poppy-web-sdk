@@ -33,24 +33,8 @@ async function getAllRouteMenusWithCache() {
   return getAllRouteMenusPromise;
 }
 
-interface CreateOrUpdateParams {
-  name: string,
-  menuCode: string,
-  parentId?: string,
-  menuData?: string,
-  confidentialLevel?: number,
-  menuType: number,
-  linkUrl?: string,
-  icon?: string,
-  sort?: 0,
-  remark?: string,
-  status?: 0
-}
-
-interface ListParams {
-  name?: string,
-  status?: number
-}
+type CreateOrUpdateParams = Partial<Menu>
+type ListParams = Partial<Menu>
 
 // async function list(params: PagingParams<ListParams>) {
 //   const response = await curl.get(`/api/poppy/v1/roles`, { params, });

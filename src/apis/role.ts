@@ -2,17 +2,9 @@ import { Role } from "../data/Role";
 import { PagingParams, PagingResult } from "../data/Paging";
 import curl from "../utils/curl"
 
-interface CreateOrUpdateParams {
-  name: string,
-  confidentialLevel?: number,
-  status?: number,
-  remark?: string
-}
+type CreateOrUpdateParams = Partial<Role>
 
-interface ListParams {
-  name?: string,
-  status?: number
-}
+type ListParams = Partial<Role>
 
 async function list(params: PagingParams<ListParams>) {
   const response = await curl.get(`/api/poppy/v1/roles`, { params, });

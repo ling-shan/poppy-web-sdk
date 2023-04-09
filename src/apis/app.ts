@@ -27,17 +27,7 @@ async function getByDomainWithCache() {
   return getByDomainPromise;
 }
 
-interface CreateOrUpdateParams {
-  name: string,
-  email: string,
-  logoImg?: string,
-  intro?: string,
-  remark?: string,
-  footer?: string,
-  footerExt?: string,
-  lookAndFeel?: string,
-  status?: number,
-}
+type CreateOrUpdateParams = Partial<AppInfo>
 
 interface ListParams {
   name?: string,
