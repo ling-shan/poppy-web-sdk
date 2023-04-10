@@ -2,10 +2,10 @@
 
 export function isRequestError(error: any) {
   if (error.name !== 'AxiosError') {
-    return true;
+    return false;
   }
 
-  return false;
+  return true;
 }
 
 
