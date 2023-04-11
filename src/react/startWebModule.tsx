@@ -12,7 +12,7 @@ interface StartWebModuleOpts {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const WebModuleContext = React.createContext<WebModuleFactoryContext>({} as any);
+const WebModuleContext = React.createContext<WebModuleFactoryContext| undefined>(undefined);
 
 export function useWebModuleContext() {
   return useContext(WebModuleContext);
@@ -30,7 +30,7 @@ export function startWebModule(opts: StartWebModuleOpts) {
     const Wrapper = opts.wrapper ?? React.Fragment;
     const render = ReactDOM.createRoot(context?.container ?? document.getElementById('root') ?? document.body);
     render.render(
-      <WebModuleContext.Provider value={context as WebModuleFactoryContext}>
+      <WebModuleContext.Provider value={context}>
         <WebModule>
           <Wrapper>
           { webModuleContent }
