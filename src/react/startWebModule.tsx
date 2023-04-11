@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement } from 'react';
+import React, { ComponentType, ReactElement, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { WebModuleFactoryContext } from "../utils/webModuleLoader";
 import WebModule from './components/WebModule';
@@ -9,6 +9,13 @@ type LazyReactElementFactory = (context?: WebModuleFactoryContext) => Promise<Re
 interface StartWebModuleOpts {
   wrapper?: ComponentType
   view?: ReactElement | LazyReactElementFactory
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const WebModuleContext = React.createContext<WebModuleFactoryContext>({} as any);
+
+export function useWebModuleContext() {
+  return useContext(WebModuleContext);
 }
 
 export function startWebModule(opts: StartWebModuleOpts) {
@@ -23,11 +30,13 @@ export function startWebModule(opts: StartWebModuleOpts) {
     const Wrapper = opts.wrapper ?? React.Fragment;
     const render = ReactDOM.createRoot(context?.container ?? document.getElementById('root') ?? document.body);
     render.render(
-      <WebModule>
-        <Wrapper>
-        { webModuleContent }
-        </Wrapper>
-      </WebModule>
+      <WebModuleContext.Provider value={context as WebModuleFactoryContext}>
+        <WebModule>
+          <Wrapper>
+          { webModuleContent }
+          </Wrapper>
+        </WebModule>
+      </WebModuleContext.Provider>
     );
 
     return () => {
