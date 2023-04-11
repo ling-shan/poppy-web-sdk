@@ -5,13 +5,27 @@ import { AppInfo } from "../data/AppInfo";
 import { PagingParams, PagingResult } from "../data/Paging";
 
 async function getByDomain() {
-  const response = await curl(`/api/poppy/v1/apps/domains/${encodeURIComponent(getClientDomain())}`)
+  const response = await curl(`/api/poppy/v1/apps/domain`, {
+    params: {
+      domain: `${encodeURIComponent(getClientDomain())}`
+    }
+  })
 
-  const lookAndFeel = response.data.lookAndFeel ? JSON.parse(response.data.lookAndFeel) : null;
-  response.data.lookAndFeel = lookAndFeel;
+  if (response.data.lookAndFeel) {
+    try {
+      response.data.lookAndFeel = JSON.parse(response.data.lookAndFeel);
+    } catch(err) {
+      response.data.lookAndFeel = null;
+    }
+  }
 
-  const footerExt = response.data.footerExt ? JSON.parse(response.data.footerExt) : null;
-  response.data.footerExt = footerExt;
+  if (response.data.footerExt) {
+    try {
+      response.data.footerExt = JSON.parse(response.data.footerExt)
+    } catch (err) {
+      response.data.footerExt = null;
+    }
+  }
 
   return response.data as AppInfo;
 }
