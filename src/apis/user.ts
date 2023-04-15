@@ -1,6 +1,7 @@
 import { User } from "../data/User";
 import { PagingParams, PagingResult } from "../data/Paging";
 import curl from "../utils/curl"
+import { Role } from "../data/Role";
 
 type CreateOrUpdateParams = Partial<User>
 
@@ -33,6 +34,18 @@ async function del(id: string) {
   await curl.delete(`/api/poppy/v1/users/${id}`);
 }
 
+async function getRolesByUserId(id: string) {
+  const response = await curl.get(`/api/poppy/v1/users/${id}/roles`);
+  return response.data as Role[];
+}
+
+async function updateRolesByUserId(id: string, roleIds: string[]) {
+  const response = await curl.put(`/api/poppy/v1/users/${id}/roles`, {
+    roleIds: roleIds ?? []
+  });
+  return response.data as Role[];
+}
+
 export default {
   getCurrent,
   list,
@@ -40,4 +53,6 @@ export default {
   get,
   update,
   del,
+  getRolesByUserId,
+  updateRolesByUserId,
 }

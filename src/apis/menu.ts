@@ -65,13 +65,15 @@ async function getMenusByRoleId(roleId: string) {
   return response.data as Menu[]
 }
 
-interface RoleMenuPermissions {
-  menuId: string[]
-  operate: ("cancel" | "empower")[]
-}
+// interface RoleMenuPermissions {
+//   menuId: string[]
+//   operate?: ("cancel" | "empower")[]
+// }
 
-async function updateMenusPermissionsByRoleId(roleId: string, menuPermissions: RoleMenuPermissions) {
-  await curl.put(`/api/poppy/v1/menus/roles/${roleId}`, menuPermissions);
+async function updateMenusPermissionsByRoleId(roleId: string, menuIds: string[]) {
+  await curl.put(`/api/poppy/v1/menus/roles/${roleId}`, {
+    menuIds,
+  });
 }
 
 async function del(id: string) {
