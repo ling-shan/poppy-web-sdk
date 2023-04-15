@@ -7,11 +7,12 @@ export interface AppInfo {
   lookAndFeel: Record<string, any> | null
   domain: string
   name: string
-  logoImg: string
+  logoImg: string | null
   defaultRoleId: string
-  intro: string
+  intro: string | null
   expireAt: string
   remark: string
   footer: string
   footerExt: Record<string, any> | null
+  waterPrint: string | null
 }
