@@ -11,6 +11,7 @@ export interface OperationLog {
 
   requestUrl: string
   requestIp: string
+  requestMethod: string
   requestParams: string
   requestUserAgent: string
   responseBody: string

@@ -4,7 +4,7 @@ import { App, ConfigProvider } from 'antd'
 import { MessageInstance } from "antd/es/message/interface";
 
 import styleAPI from '../../../apis/style'
-import { insertCustomizedStyles } from '../../../utils/style';
+import { hasCustomizedStyles, insertCustomizedStyles } from '../../../utils/style';
 import errorHandling from '../../../utils/errorHandling'
 import toastMessage from '../../../utils/toastMessage'
 import i18n from "../../../utils/i18n";
@@ -16,6 +16,9 @@ import { ReactElement } from "react-markdown/lib/react-markdown";
 
 function initStyles() {
   // init load styles
+  if (hasCustomizedStyles()) {
+    return;
+  }
   styleAPI.getStyleBundle().then(styleBundle => {
     insertCustomizedStyles(styleBundle);
   })
