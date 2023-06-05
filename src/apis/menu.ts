@@ -71,9 +71,14 @@ async function getMenusByRoleId(roleId: string) {
 // }
 
 async function updateMenusPermissionsByRoleId(roleId: string, menuIds: string[]) {
-  await curl.put(`/api/poppy/v1/menus/roles/${roleId}`, {
+  await curl.put(`/api/poppy/v1/menus/roles/${roleId}/permissions`, {
     menuIds,
   });
+}
+
+async function getMenusPermissionsByRoleId(roleId: string) {
+  const response = await curl.get(`/api/poppy/v1/menus/roles/${roleId}/permissions`);
+  return response.data as Menu[]
 }
 
 async function del(id: string) {
@@ -92,5 +97,6 @@ export default {
   list,
   getMenusByParentId,
   getMenusByRoleId,
+  getMenusPermissionsByRoleId,
   updateMenusPermissionsByRoleId,
 }
