@@ -46,6 +46,28 @@ async function updateRolesByUserId(id: string, roleIds: string[]) {
   return response.data as Role[];
 }
 
+async function resetPassword(authToken: string, password: string) {
+  await curl.post(`/api/poppy/v1/users/credentials/reset-password`, {
+    password
+  }, {
+    headers: {
+      "X-Auth-Token": authToken
+    }
+  });
+}
+
+
+async function updatePassword(authToken: string, password: string) {
+  await curl.put(`/api/poppy/v1/users/credentials/password`, {
+    password
+  }, {
+    headers: {
+      "X-Auth-Token": authToken
+    }
+  });
+}
+
+
 export default {
   getCurrent,
   list,
@@ -55,4 +77,6 @@ export default {
   del,
   getRolesByUserId,
   updateRolesByUserId,
+  resetPassword,
+  updatePassword,
 }
