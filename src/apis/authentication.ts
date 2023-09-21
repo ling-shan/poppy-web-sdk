@@ -11,6 +11,35 @@ async function authWithSession(userName: string, password: string) {
   return response.data as AuthData;
 }
 
+async function authWithActiveCaptcha(userName: string) {
+  const response = await curl.post(`/api/poppy/v1/authentication/active-captcha`, {
+    appId: storageManager.getAppId(),
+    userName,
+  })
+  return response.data as AuthData;
+}
+
+async function authWithCaptcha(authToken: string, captcha: string) {
+  const response = await curl.post(`/api/poppy/v1/authentication/captcha`, {
+    captcha,
+  }, {
+    headers: {
+      "X-Auth-Token": authToken
+    }
+  })
+  return response.data as AuthData;
+}
+
+async function authWithPassword(password: string) {
+  const response = await curl.post(`/api/poppy/v1/authentication/password`, {
+    password,
+  })
+  return response.data as AuthData;
+}
+
 export default {
-  authWithSession
+  authWithSession,
+  authWithActiveCaptcha,
+  authWithCaptcha,
+  authWithPassword,
 }
