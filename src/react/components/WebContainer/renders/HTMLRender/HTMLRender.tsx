@@ -14,7 +14,11 @@ function HTMLRender(props: RenderComponentProps) {
   const onLoadedHandel: ReactEventHandler = useCallback((evt) => {
     const iframeElement = evt.target as HTMLIFrameElement;
     if (iframeElement) {
-      iframeElement.style.height = iframeElement.contentWindow?.document.body.scrollHeight + 'px';
+      try {
+        iframeElement.style.height = iframeElement.contentWindow?.document.body.scrollHeight + 'px';
+      } catch (err) {
+        console.warn("Iframe security error" + err);
+      }
     }
     onLoad?.();
   }, [onLoad]);
