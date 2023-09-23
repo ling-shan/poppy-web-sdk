@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAbsPathURLObject, getPathURLByURLObject, objectToSearchParamsStr } from '../../../utils/url'
+import { getAbsPathURLObject, getPathURLByURLObject, getURLSearchParams, objectToSearchParamsStr } from '../../../utils/url'
 import { RenderTypes } from './renderRegistory'
 
 import { ProxyRender } from './renders/ProxyRender';
@@ -52,14 +52,16 @@ export function WebContainer(props: WebContainerProps) {
       }
       setRenderType(RenderTypes.WebModule);
     } else {
+      const searchParams = getURLSearchParams(pathUrl);
+      const renderType = searchParams.get("renderType");
       pathUrl = getPathURLByURLObject(getAbsPathURLObject(pathUrl));
-      if (pathUrl.endsWith(".html")) {
+      if (renderType === RenderTypes.HTML || pathUrl.endsWith(".html") || pathUrl.endsWith(".HTML")) {
         setRenderType(RenderTypes.HTML);
-      } else if (pathUrl.endsWith("asset-manifest.json")) {
+      } else if (renderType === RenderTypes.WebModule || pathUrl.endsWith("asset-manifest.json")) {
         setRenderType(RenderTypes.WebModule);
-      } else if (pathUrl.endsWith(".md") || pathUrl.endsWith(".markdown")) {
+      } else if (renderType === RenderTypes.Markdown || pathUrl.endsWith(".md") || pathUrl.endsWith(".MD") || pathUrl.endsWith(".markdown")) {
         setRenderType(RenderTypes.Markdown);
-      } else if (pathUrl.endsWith(".rtext")) {
+      } else if (renderType === RenderTypes.RichText || pathUrl.endsWith(".rtext")) {
         setRenderType(RenderTypes.RichText);
       } else {
         setRenderType(RenderTypes.None);

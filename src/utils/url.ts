@@ -72,3 +72,9 @@ export function getAbsPathURLObject(url: string) {
 export function getPathURLByURLObject(url: URL) {
   return url.origin + url.pathname
 }
+
+export function getURLSearchParams(url: string) {
+  const searchIdx = url.indexOf("?");
+  const searchStr = url.substring(searchIdx);
+  return new URLSearchParams(searchStr);
+}
