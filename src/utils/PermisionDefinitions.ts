@@ -10,14 +10,20 @@ export interface PermisionDefinition {
   Delete: string,
 }
 
-function definePermision(resourceName: string) {
+export function definePermision(resourceName: string) {
   return {
     Create: `${resourceName}:c`,
     Read: `${resourceName}:r`,
     Write: `${resourceName}:u`,
     Delete: `${resourceName}:d`,
+
+    custom(flag: string) {
+      return `${resourceName}:${flag}`;
+    }
   }
 }
+
+
 
 export default {
   App: definePermision('app'),
