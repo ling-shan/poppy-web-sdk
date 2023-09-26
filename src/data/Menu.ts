@@ -17,6 +17,7 @@ export interface Menu {
   linkUrl: string
   icon: string
   sort: number
+  isPerm: number
   remark: string
 }
 
