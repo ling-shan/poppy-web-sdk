@@ -21,7 +21,7 @@ async function create(params: Partial<CustomizedService>) {
     extendParameters: params.extendParameters ? JSON.stringify(params.extendParameters) : undefined,
     mockResponse: params.extendParameters ? JSON.stringify(params.mockResponse) : undefined,
   };
-  await curl.post(`/api/poppy/v1/apps`, data);
+  await curl.post(`/api/poppy/v1/customized-services`, data);
 }
 
 async function update(id: string, params: Partial<CustomizedService>) {
