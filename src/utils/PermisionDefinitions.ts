@@ -35,5 +35,5 @@ export default {
   Session: definePermision('sesion'),
   Style: definePermision('style'),
   User: definePermision('user'),
-  CustomizedService: definePermision('customized-service'),
+  CustomizedService: definePermision('customizedService'),
 }
