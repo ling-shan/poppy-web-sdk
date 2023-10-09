@@ -23,8 +23,6 @@ export function definePermision(resourceName: string) {
   }
 }
 
-
-
 export default {
   App: definePermision('app'),
   Config: definePermision('config'),
@@ -37,4 +35,5 @@ export default {
   Session: definePermision('sesion'),
   Style: definePermision('style'),
   User: definePermision('user'),
+  CustomizedService: definePermision('customized-service'),
 }
