@@ -32,7 +32,7 @@ export default {
   Menu: definePermision('menu'),
   OperationLog: definePermision('operationLog'),
   Role: definePermision('role'),
-  Session: definePermision('sesion'),
+  Session: definePermision('session'),
   Style: definePermision('style'),
   User: definePermision('user'),
   CustomizedService: definePermision('customizedService'),
