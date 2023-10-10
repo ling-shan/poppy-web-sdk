@@ -10,4 +10,5 @@ export interface Role {
   remark: string
   parentId: string
   confidentialLevel: number
+  roleType: number
 }
