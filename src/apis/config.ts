@@ -28,10 +28,22 @@ async function del(id: string) {
   await curl.delete(`/api/poppy/v1/configs/${id}`);
 }
 
+async function getValue(key: string) {
+  const response = await curl.get(`/api/poppy/v1/configs/current/${key}`);
+  return response.data as string;
+}
+
+async function getValueByAppId(key: string, appId: string) {
+  const response = await curl.get(`/api/poppy/v1/configs/${appId}/${key}`);
+  return response.data as string;
+}
+
 export default {
   list,
   create,
   get,
   update,
   del,
+  getValue,
+  getValueByAppId,
 }
