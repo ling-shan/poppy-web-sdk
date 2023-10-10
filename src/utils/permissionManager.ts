@@ -63,6 +63,10 @@ class PermissionManagerImpl implements PermissionManager {
     return permisions;
   }
 
+  getPermissions() {
+    return Object.assign({}, this.mergedPermisions);
+  }
+
   hasPermission(key: string): boolean {
     if (this.debug || (appENV.dev && appENV.debug)) {
       return true;
