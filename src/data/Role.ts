@@ -1,3 +1,11 @@
+// 0:normal 1:system admin 2:system default 3: system app default
+export enum Roleype {
+  Normal = 0,
+  SystemAdmin = 1,
+  SystemDefault = 2,
+  SystemAppDefault = 3,
+}
+
 export interface Role {
   id: string
   appId: string
