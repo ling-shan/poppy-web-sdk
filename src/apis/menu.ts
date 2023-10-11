@@ -82,7 +82,7 @@ async function getMenusPermissionsByRoleId(roleId: string) {
 }
 
 async function del(id: string) {
-  await curl.delete(`/api/poppy/v1/roles/${id}`);
+  await curl.delete(`/api/poppy/v1/menus/${id}`);
 }
 
 export default {
