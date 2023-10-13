@@ -38,6 +38,8 @@ class DialogManagerImpl implements DialogManager {
 
 export const dialogManager: DialogManager = (window as any).$dialogManager ?? new DialogManagerImpl();
 
+(window as any).$dialogManager = dialogManager;
+
 export default dialogManager;
 
 

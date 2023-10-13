@@ -12,14 +12,14 @@ function HTMLRender(props: RenderComponentProps) {
   }, [onStart, url]);
 
   const onLoadedHandel: ReactEventHandler = useCallback((evt) => {
-    const iframeElement = evt.target as HTMLIFrameElement;
-    if (iframeElement) {
-      try {
-        iframeElement.style.height = iframeElement.contentWindow?.document.body.scrollHeight + 'px';
-      } catch (err) {
-        console.warn("Iframe security error" + err);
-      }
-    }
+    // const iframeElement = evt.target as HTMLIFrameElement;
+    // if (iframeElement) {
+    //   try {
+    //     iframeElement.style.height = iframeElement.contentWindow?.document.body.scrollHeight + 'px';
+    //   } catch (err) {
+    //     console.warn("Iframe security error" + err);
+    //   }
+    // }
     onLoad?.();
   }, [onLoad]);
 
