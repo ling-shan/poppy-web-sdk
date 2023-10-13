@@ -55,4 +55,8 @@ class ToastMessageImpl implements ToastMessage {
   }
 }
 
-export default new ToastMessageImpl();
+const toastMessage = (window as any).$toastMessage = new ToastMessageImpl();
+
+(window as any).$toastMessage = toastMessage;
+
+export default toastMessage;

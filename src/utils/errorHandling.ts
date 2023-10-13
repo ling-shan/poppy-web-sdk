@@ -14,10 +14,42 @@ export interface ErrorHandling {
   handleError(error: unknown): void
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 class ErrorHandlingImpl implements ErrorHandling {
+  private errorHandlers: HandleErrroFunction[] = [];
+
   onHandleError(callback: HandleErrroFunction): CallableFunction {
-    return eventEmitter.on((evt) => {
-      callback(evt.payload)
+    if (this.errorHandlers.includes(callback)) {
+      return noop;
+    }
+
+    this.errorHandlers.push(callback);
+
+    return () => {
+      const delIndex = this.errorHandlers.indexOf(callback);
+      if (delIndex < 0) {
+        return;
+      }
+      this.errorHandlers.splice(delIndex, 1);
+    }
+  }
+
+  constructor() {
+    eventEmitter.on((evt) => {
+      let err = evt.payload;
+      // from the last oen to previos one.
+      const errorHandlers = this.errorHandlers.reverse();
+      for (const errorHandler of errorHandlers) {
+        const errorResult = errorHandler(err);
+        if (!!errorResult && typeof errorResult !== "boolean") {
+          // process the err with previos
+          err = errorResult;
+        } else {
+          break;
+        }
+      }
     })
   }
 
@@ -29,6 +61,10 @@ class ErrorHandlingImpl implements ErrorHandling {
   }
 }
 
-export default new ErrorHandlingImpl();
+const errorHandling = (window as any).$errorHandling = new ErrorHandlingImpl();
+
+(window as any).$errorHandling = errorHandling;
+
+export default errorHandling
 
 
