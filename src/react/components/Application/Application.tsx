@@ -74,7 +74,11 @@ function initToastMessage(messageAPI: MessageInstance) {
   })
 }
 
-function AppInitLayer(props: PropsWithChildren) {
+export interface AppInitializer {
+  initialize?: () => void
+}
+
+function AppInitLayer(props: PropsWithChildren<AppInitializer>) {
   const { message } = App.useApp();
   // first inital for the appplication
   useEffect(() => {
@@ -84,18 +88,19 @@ function AppInitLayer(props: PropsWithChildren) {
     initStyles();
     initToastMessage(message);
     initErrorhandling();
+    props.initialize?.();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return props.children as ReactElement
 }
 
-export function Application(props: PropsWithChildren) {
+export function Application(props: PropsWithChildren<AppInitializer>) {
   return (
     <ErrorBoundary>
       <ConfigProvider>
         <App>
-          <AppInitLayer>
+          <AppInitLayer initialize={props.initialize}>
             { props.children }
           </AppInitLayer>
         </App>

@@ -7,6 +7,7 @@ import { startWebModule as originStartWebModule } from '../utils/webModuleProvid
 type LazyReactElementFactory = (context?: WebModuleFactoryContext) => Promise<ReactElement>
 
 interface StartWebModuleOpts {
+  initializer?: () => void
   wrapper?: ComponentType
   view?: ReactElement | LazyReactElementFactory
 }
@@ -31,7 +32,7 @@ export function startWebModule(opts: StartWebModuleOpts) {
     const render = ReactDOM.createRoot(context?.container ?? document.getElementById('root') ?? document.body);
     render.render(
       <WebModuleContext.Provider value={context}>
-        <WebModule>
+        <WebModule initialize={opts.initializer}>
           <Wrapper>
           { webModuleContent }
           </Wrapper>

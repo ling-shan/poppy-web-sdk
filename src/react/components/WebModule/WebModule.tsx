@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from 'react';
-import Application from '../Application';
+import Application, { AppInitializer } from '../Application';
 
-export function WebModule(props: PropsWithChildren) {
+export function WebModule(props: PropsWithChildren<AppInitializer>) {
   return (
-    <Application>
+    <Application initialize={props.initialize}>
       { props.children }
     </Application>
   );
