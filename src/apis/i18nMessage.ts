@@ -7,7 +7,7 @@ type CreateOrUpdateParams = Partial<I18nMessage>
 type ListParams = Partial<I18nMessage>
 
 async function list(params: PagingParams<ListParams>) {
-  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.orderByColumn = params.orderByColumn ?? 'create_at';
   params.descOrAsc = params.descOrAsc ?? 'desc';
 
   const response = await curl.get(`/api/poppy/v1/i18n-messages`, { params, });

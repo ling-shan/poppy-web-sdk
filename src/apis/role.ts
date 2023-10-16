@@ -7,7 +7,7 @@ type CreateOrUpdateParams = Partial<Role>
 type ListParams = Partial<Role>
 
 async function list(params: PagingParams<ListParams>) {
-  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.orderByColumn = params.orderByColumn ?? 'create_at';
   params.descOrAsc = params.descOrAsc ?? 'desc';
 
   const response = await curl.get(`/api/poppy/v1/roles`, { params, });

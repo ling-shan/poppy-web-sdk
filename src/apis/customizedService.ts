@@ -10,7 +10,7 @@ interface ListParams {
 }
 
 async function list(params: PagingParams<ListParams>) {
-  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.orderByColumn = params.orderByColumn ?? 'create_at';
   params.descOrAsc = params.descOrAsc ?? 'desc';
 
   const response = await curl.get(`/api/poppy/v1/customized-services`, { params, });

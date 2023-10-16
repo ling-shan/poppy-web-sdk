@@ -5,7 +5,7 @@ import curl from "../utils/curl";
 type ListParams = Partial<OperationLog>
 
 async function list(params: PagingParams<ListParams>) {
-  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.orderByColumn = params.orderByColumn ?? 'create_at';
   params.descOrAsc = params.descOrAsc ?? 'desc';
 
   const response = await curl.get(`/api/poppy/v1/operation-logs`, { params, });

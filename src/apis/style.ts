@@ -13,7 +13,7 @@ type CreateOrUpdateParams = Partial<Style>
 type ListParams = Partial<Style>
 
 async function list(params: PagingParams<ListParams>) {
-  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.orderByColumn = params.orderByColumn ?? 'create_at';
   params.descOrAsc = params.descOrAsc ?? 'desc';
 
   const response = await curl.get(`/api/poppy/v1/styles`, { params, });
