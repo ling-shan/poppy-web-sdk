@@ -26,6 +26,7 @@ export function definePermision(resourceName: string) {
 export default {
   App: definePermision('app'),
   Config: definePermision('config'),
+  Card: definePermision('card'),
   Domain: definePermision('domain'),
   I18nMessage: definePermision('i18nMessage'),
   Lang: definePermision('lang'),
