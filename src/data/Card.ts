@@ -12,4 +12,5 @@ export interface Card {
     coverImg: string
     intro: string | null
     linkUrl: string | null
+    sort: number
   }
