@@ -47,6 +47,8 @@ interface ListParams {
 }
 
 async function list(params: PagingParams<ListParams>) {
+  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.descOrAsc = params.descOrAsc ?? 'desc';
   const response = await curl.get(`/api/poppy/v1/apps`, { params, });
   return response.data as PagingResult<AppInfo>
 }

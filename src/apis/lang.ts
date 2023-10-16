@@ -21,6 +21,9 @@ type CreateOrUpdateParams = Partial<Lang>
 type CreateLangParams = Partial<Lang>
 
 async function list(params: PagingParams) {
+  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.descOrAsc = params.descOrAsc ?? 'desc';
+
   const response = await curl.get(`/api/poppy/v1/langs`, { params, });
   return response.data as PagingResult<Lang>
 }

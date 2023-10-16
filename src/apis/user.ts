@@ -8,6 +8,9 @@ type CreateOrUpdateParams = Partial<User>
 type ListParams = Partial<User>
 
 async function list(params: PagingParams<ListParams>) {
+  params.orderByColumn = params.orderByColumn ?? 'createAt';
+  params.descOrAsc = params.descOrAsc ?? 'desc';
+
   const response = await curl.get(`/api/poppy/v1/users`, { params, });
   return response.data as PagingResult<User>
 }
