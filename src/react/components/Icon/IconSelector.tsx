@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { Icon } from './Icon'
 import classes from './IconSelector.module.css'
 import React from 'react'
-import { useI18nMessage } from 'react/hooks/useI18nMessage'
+import { useI18nMessage } from '../../hooks/useI18nMessage'
 
 //TODO this title text need to covered i18n
 
