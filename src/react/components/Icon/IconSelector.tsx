@@ -4,13 +4,14 @@ import classnames from 'classnames'
 import { Icon } from './Icon'
 import classes from './IconSelector.module.css'
 import React from 'react'
+import { useI18nMessage } from 'react/hooks/useI18nMessage'
 
 //TODO this title text need to covered i18n
 
 const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   {
     key: 'directional',
-    title: '方向性图标',
+    title: 'ui.icon-selector-icon-arrow.title',
     icons: [
       'step-backward',
       'step-forward',
@@ -72,7 +73,7 @@ const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   },
   {
     key: 'suggested',
-    title: '提示建议性图标',
+    title: 'ui.icon-selector-icon-suggestion.title',
     icons: [
       'question',
       'question-circle',
@@ -101,7 +102,7 @@ const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   },
   {
     key: 'editor',
-    title: '编辑类图标',
+    title: 'ui.icon-selector-icon-edit.title',
     icons: [
       'edit',
       'form',
@@ -139,7 +140,7 @@ const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   },
   {
     key: 'data',
-    title: '数据类图标',
+    title: 'ui.icon-selector-icon-data.title',
     icons: [
       'area-chart',
       'pie-chart',
@@ -158,7 +159,7 @@ const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   },
   {
     key: 'brand_logo',
-    title: '网站通用图标',
+    title: 'ui.icon-selector-icon-website.title',
     icons: [
       'account-book',
       'alert',
@@ -342,7 +343,7 @@ const iconTypeArray: { key: string; title: string; icons: string[] }[] = [
   },
   {
     key: 'application',
-    title: '品牌和标识',
+    title: 'ui.icon-selector-icon-brand.title',
     icons: [
       'android',
       'apple',
@@ -407,6 +408,8 @@ export const IconSelect = (props: IconSelectProps) => {
   const [visible, setVisible] = useState(false)
   const [selectIcon, setSelectIcon] = useState(value)
 
+  const i18nMessage =  useI18nMessage();
+
   useEffect(() => {
     if (visible) {
       setSelectIcon(value)
@@ -416,7 +419,7 @@ export const IconSelect = (props: IconSelectProps) => {
   const items = iconTypeArray.map((item) => {
     const { key, icons, title } = item
     return {
-      label: title,
+      label: i18nMessage.formatMessage(title),
       key,
       children: (
         <ul className={classes.iconUl} key={`icon-select-ul-${key}`}>
