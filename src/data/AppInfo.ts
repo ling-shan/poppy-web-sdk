@@ -8,6 +8,7 @@ export interface AppInfo {
   domain: string
   name: string
   logoImg: string | null
+  favicon: string | null
   defaultRoleId: string
   intro: string | null
   expireAt: string

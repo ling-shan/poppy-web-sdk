@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { App, ConfigProvider } from 'antd'
 import { MessageInstance } from "antd/es/message/interface";
 
@@ -13,6 +13,7 @@ import { ErrorBoundary } from "../ErrorBoundary";
 import { isRequestError } from "../../../utils/error";
 import appENV from "../../../utils/appEnv";
 import { ReactElement } from "react-markdown/lib/react-markdown";
+import storageManager from "../../../utils/storageManager";
 
 function initStyles() {
   // init load styles
@@ -96,9 +97,13 @@ function AppInitLayer(props: PropsWithChildren<AppInitializer>) {
 }
 
 export function Application(props: PropsWithChildren<AppInitializer>) {
+  const locale = useMemo(() => {
+    return storageManager.getLanguage() ?? '';
+  }, [])
+
   return (
     <ErrorBoundary>
-      <ConfigProvider>
+      <ConfigProvider locale={{locale, }}>
         <App>
           <AppInitLayer initialize={props.initialize}>
             { props.children }
