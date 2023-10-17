@@ -19,6 +19,8 @@ export interface Menu {
   sort: number
   isPerm: number
   remark: string
+  isExternalResource: number
+  resourceParams: string
 }
 
 // 菜单状态
