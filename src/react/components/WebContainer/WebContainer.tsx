@@ -40,20 +40,20 @@ export function WebContainer(props: WebContainerProps) {
   useEffect(() => {
     let pathUrl = props.url ?? "";
     if (pathUrl.startsWith("@") && pathUrl.length > 1) {
-      if (props.params) {
-        const searchParamsStr = objectToSearchParamsStr(props.params);
-        if (searchParamsStr) {
-          if (pathUrl.includes('?')) {
-            pathUrl = pathUrl + '&' + searchParamsStr;
-          } else {
-            pathUrl = pathUrl + '?' + searchParamsStr;
-          }
-        }
-      }
+      // if (props.params) {
+      //   const searchParamsStr = objectToSearchParamsStr(props.params);
+      //   if (searchParamsStr) {
+      //     if (pathUrl.includes('?')) {
+      //       pathUrl = pathUrl + '&' + searchParamsStr;
+      //     } else {
+      //       pathUrl = pathUrl + '?' + searchParamsStr;
+      //     }
+      //   }
+      // }
       setRenderType(RenderTypes.WebModule);
     } else {
-      const searchParams = getURLSearchParams(pathUrl);
-      const renderType = searchParams.get("renderType");
+      // const searchParams = getURLSearchParams(pathUrl);
+      const renderType = props.params?.renderType;
       pathUrl = getPathURLByURLObject(getAbsPathURLObject(pathUrl));
       if (renderType === RenderTypes.HTML || pathUrl.endsWith(".html") || pathUrl.endsWith(".HTML")) {
         setRenderType(RenderTypes.HTML);
