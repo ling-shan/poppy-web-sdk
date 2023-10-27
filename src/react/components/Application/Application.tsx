@@ -83,12 +83,11 @@ function AppInitLayer(props: PropsWithChildren<AppInitializer>) {
   const { message } = App.useApp();
   // first inital for the appplication
   useEffect(() => {
-    if (appENV.webModule) {
-      return;
+    if (!appENV.webModule) { // page application
+      initStyles();
+      initToastMessage(message);
+      initErrorhandling();
     }
-    initStyles();
-    initToastMessage(message);
-    initErrorhandling();
     props.initialize?.();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
