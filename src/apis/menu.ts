@@ -3,7 +3,7 @@ import curl from "../utils/curl"
 import { Menu } from "../data/Menu";
 
 async function getRouteMenuByMenuCode(menuCode: string) {
-  const { data } = await curl(`/api/poppy/v1/menus/route-menus/menuCode`, {
+  const { data } = await curl(`/api/poppy/v1/menus/route-menus/menu-code`, {
     params: {
       menuCode: decodeURIComponent(menuCode),
     }
