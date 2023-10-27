@@ -40,7 +40,7 @@ class ErrorHandlingImpl implements ErrorHandling {
     eventEmitter.on((evt) => {
       let err = evt.payload;
       // from the last oen to previos one.
-      const errorHandlers = this.errorHandlers.reverse();
+      const errorHandlers = [...this.errorHandlers].reverse();
       for (const errorHandler of errorHandlers) {
         const errorResult = errorHandler(err);
         if (!!errorResult && typeof errorResult !== "boolean") {
