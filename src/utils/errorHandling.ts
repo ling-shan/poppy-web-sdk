@@ -61,7 +61,7 @@ class ErrorHandlingImpl implements ErrorHandling {
   }
 }
 
-const errorHandling = (window as any).$errorHandling = new ErrorHandlingImpl();
+const errorHandling = (window as any).$errorHandling ?? new ErrorHandlingImpl();
 
 (window as any).$errorHandling = errorHandling;
 
