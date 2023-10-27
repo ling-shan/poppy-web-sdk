@@ -55,7 +55,7 @@ class ToastMessageImpl implements ToastMessage {
   }
 }
 
-const toastMessage = (window as any).$toastMessage ?? new ToastMessageImpl();
+const toastMessage: ToastMessage = (window as any).$toastMessage ?? new ToastMessageImpl();
 
 (window as any).$toastMessage = toastMessage;
 
