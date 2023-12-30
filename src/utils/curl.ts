@@ -15,7 +15,11 @@ export interface HttpServerApiResponse<T = any> {
 
 export const baseURL = process.env.REACT_APP_POPPY_API_PREFIX ??
   (window as any).POPPY_API_PREFIX ??
-  "http://poppy-api.lingyuan-tech.com/"
+  "http://poppy-api.lingyuan-tech.com/";
+
+  if (!(window as any).POPPY_API_PREFIX) {
+    (window as any).POPPY_API_PREFIX = baseURL;
+  }
 
 // const log = (config: InternalAxiosRequestConfig, ...args: any[]) => {
 //   const { url = '', baseURL = '', method } = config
