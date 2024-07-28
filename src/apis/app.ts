@@ -123,7 +123,7 @@ async function del(id: string) {
 async function getLookAndFeel() {
   const appId = storageManager.getAppId();
   try {
-    const response = await curl(`/api/poppy/v1/app/lookAndFeel/${appId}`)
+    const response = await curl(`/api/poppy/v1/apps/lookAndFeel/${appId}`)
     return (response.data ?? {}) as any;
   } catch (err) {
     return {};
