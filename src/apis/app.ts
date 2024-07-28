@@ -3,6 +3,7 @@ import { getClientDomain } from "../utils/domain"
 
 import { AppInfo } from "../data/AppInfo";
 import { PagingParams, PagingResult } from "../data/Paging";
+import storageManager from "utils/storageManager";
 
 async function getByDomain() {
   const response = await curl(`/api/poppy/v1/apps/domain`, {
@@ -119,8 +120,19 @@ async function del(id: string) {
   await curl.delete(`/api/poppy/v1/apps/${id}`);
 }
 
+async function getLookAndFeel() {
+  const appId = storageManager.getAppId();
+  try {
+    const response = await curl(`/api/poppy/v1/app/lookAndFeel/${appId}`)
+    return (response.data ?? {}) as any;
+  } catch (err) {
+    return {};
+  }
+}
+
 export default {
   getByDomain,
+  getLookAndFeel,
   getByDomainWithCache,
   getCurrent,
   list,
