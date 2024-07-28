@@ -11,7 +11,8 @@
     "build": "npm run clean && tsc && npm run copy-files",
     "start": "start-storybook -p 6006 -s public",
     "build:storybook": "build-storybook -s public -o docs",
-    "deploy": "npm run build && npm publish --access public --registory=https://registry.npmjs.org"
+    "publish": "npm publish --access public --registory=https://registry.npmjs.org",
+    "deploy": "npm run build && npm run publish"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
