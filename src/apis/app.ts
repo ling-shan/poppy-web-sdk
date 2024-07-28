@@ -3,7 +3,7 @@ import { getClientDomain } from "../utils/domain"
 
 import { AppInfo } from "../data/AppInfo";
 import { PagingParams, PagingResult } from "../data/Paging";
-import storageManager from "utils/storageManager";
+import storageManager from "../utils/storageManager";
 
 async function getByDomain() {
   const response = await curl(`/api/poppy/v1/apps/domain`, {
