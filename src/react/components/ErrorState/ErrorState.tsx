@@ -8,6 +8,8 @@ import styles from './ErrorState.module.css'
 type ErrorStateType = 'unknow-error' | 'notfound' | 'no-permission'
 
 interface ErrorStateProps {
+  titleText?: string
+  subTitleText?: string
   stateType?: ErrorStateType
   onRetry?: (() => void) | false
 }
@@ -46,8 +48,8 @@ export function ErrorState(props: ErrorStateProps) {
   )
 
   const state = statesMap[stateType] ?? statesMap['unknow-error'];
-  const titleText = i18nMessage.formatMessage(state.title);
-  const subTitleText = i18nMessage.formatMessage(state.subTitle);
+  const titleText = i18nMessage.formatMessage(props.titleText ?? state.title);
+  const subTitleText = i18nMessage.formatMessage(props.subTitleText ?? state.subTitle);
 
   const retryButton = useMemo(() => {
     if (props.onRetry === false) {
