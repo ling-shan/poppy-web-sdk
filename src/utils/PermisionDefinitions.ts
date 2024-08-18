@@ -40,5 +40,5 @@ export default {
   User: definePermision('user'),
   CustomizedService: definePermision('customizedService'),
   Webhook: definePermision('webhook'),
-  webhookLog: definePermision('webhookLog'),
+  WebhookLog: definePermision('webhookLog'),
 }
