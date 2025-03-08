@@ -3,6 +3,8 @@
 // resouce.[field]:operation
 // operation: c,r,u,d
 
+import webhookLog from "apis/webhookLog";
+
 export interface PermisionDefinition {
   Create: string
   Read: string,
@@ -37,4 +39,6 @@ export default {
   Style: definePermision('style'),
   User: definePermision('user'),
   CustomizedService: definePermision('customizedService'),
+  Webhook: definePermision('webhook'),
+  WebhookLog: definePermision('webhookLog'),
 }
