@@ -26,6 +26,17 @@ class I18nImpl implements I18n {
 
   constructor() {
     this.messages = (window as any).$i18nMessages ?? null;
+    if (!this.messages) {
+      const i18nMessagesEle = document.getElementById("i18n-messages");
+      if (i18nMessagesEle) {
+        try {
+          this.messages = JSON.parse(i18nMessagesEle.innerText);
+        // eslint-disable-next-line no-empty
+        } catch (err) {
+        }
+      }
+    }
+
     if (this.messages) {
       this.loaded = true;
     }

@@ -25,7 +25,7 @@ function initStyles() {
   })
 }
 
-function initErrorhandling() {
+function initErrorHandling() {
   errorHandling.onHandleError(((err: any) => {
     if (!err) {
       return;
@@ -86,7 +86,7 @@ function AppInitLayer(props: PropsWithChildren<AppInitializer>) {
     if (!appENV.webModule) { // page application
       initStyles();
       initToastMessage(message);
-      initErrorhandling();
+      initErrorHandling();
     }
     props.initialize?.();
   // eslint-disable-next-line react-hooks/exhaustive-deps
