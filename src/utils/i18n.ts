@@ -30,7 +30,14 @@ class I18nImpl implements I18n {
       const i18nMessagesEle = document.getElementById("i18n-messages");
       if (i18nMessagesEle) {
         try {
-          this.messages = JSON.parse(i18nMessagesEle.innerText);
+          const messagesWithLocaleJson = JSON.parse(i18nMessagesEle.innerText);
+          let findLang = navigator.languages.find((lang) => !!(messagesWithLocaleJson[lang]));
+          if (!findLang) {
+            findLang = Object.keys(messagesWithLocaleJson)[0];
+          }
+          if (findLang) {
+            this.messages = messagesWithLocaleJson[findLang];
+          }
         // eslint-disable-next-line no-empty
         } catch (err) {
         }

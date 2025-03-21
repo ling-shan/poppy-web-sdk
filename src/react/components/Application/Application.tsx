@@ -4,7 +4,7 @@ import { App, ConfigProvider } from 'antd'
 import { MessageInstance } from "antd/es/message/interface";
 
 import styleAPI from '../../../apis/style'
-import { hasCustomizedStyles, insertCustomizedStyles } from '../../../utils/style';
+import { getCustomizedStyleBundle, hasCustomizedStyles, insertCustomizedStyles } from '../../../utils/style';
 import errorHandling from '../../../utils/errorHandling'
 import toastMessage from '../../../utils/toastMessage'
 import i18n from "../../../utils/i18n";
@@ -18,6 +18,10 @@ import storageManager from "../../../utils/storageManager";
 function initStyles() {
   // init load styles
   if (hasCustomizedStyles()) {
+    const styleBundle = getCustomizedStyleBundle();
+    if (styleBundle) {
+      insertCustomizedStyles(styleBundle);
+    }
     return;
   }
   styleAPI.getStyleBundle().then(styleBundle => {
@@ -114,3 +118,4 @@ export function Application(props: PropsWithChildren<AppInitializer>) {
 }
 
 export default Application;
+

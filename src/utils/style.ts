@@ -4,10 +4,20 @@ export function hasCustomizedStyles() {
   return !!window.document.getElementById('poppy-themes');
 }
 
-export function insertCustomizedStyles(styleBundle: StyleBundle) {
-  if (hasCustomizedStyles()) {
-    return;
+export function getCustomizedStyleBundle() {
+  const styleBundleEle = document.getElementById("poppy-themes");
+  if (styleBundleEle) {
+    try {
+      const styleBundleJson = JSON.parse(styleBundleEle.innerText);
+      return styleBundleJson;
+    // eslint-disable-next-line no-empty
+    } catch (err) {
+    }
   }
+  return null;
+}
+
+export function insertCustomizedStyles(styleBundle: StyleBundle) {
   const cssContent = Object.keys(styleBundle)
   .filter(key => {
     if (!key) {
